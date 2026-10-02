@@ -1,0 +1,278 @@
+// FeirAL - Plataforma de feirinhas de Alagoas
+// SQLite (zero-config) - trocavel para PostgreSQL alterando provider + DATABASE_URL.
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id           String   @id @default(cuid())
+  name         String
+  email        String   @unique
+  passwordHash String
+  role         String   @default("VISITOR") // VISITOR | ORGANIZER | ADMIN
+  avatarUrl    String?
+  bio          String?
+  city         String?
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  fairs            Fair[]
+  reviews          Review[]
+  comments         Comment[]
+  feedbacks        OrganizerFeedback[]
+  follows          Follow[]
+  notifications    Notification[]
+  ads              Advertisement[]
+  reports          ModerationReport[] @relation("Reporter")
+  handledReports   ModerationReport[] @relation("Handler")
+  conversations    Conversation[]
+  auditLogs        AuditLog[]
+  notificationPref NotificationPreference?
+  resetTokens      PasswordResetToken[]
+}
+
+model PasswordResetToken {
+  id        String    @id @default(cuid())
+  userId    String
+  user      User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  token     String    @unique
+  expiresAt DateTime
+  usedAt    DateTime?
+  createdAt DateTime  @default(now())
+}
+
+model NotificationPreference {
+  id                  String   @id @default(cuid())
+  userId              String   @unique
+  user                User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  emailEnabled        Boolean  @default(true)
+  pushEnabled         Boolean  @default(false)
+  newEvents           Boolean  @default(true)
+  reviewReplies       Boolean  @default(true)
+  weeklyDigest        Boolean  @default(false)
+  preferredCategories String   @default("") // slugs separados por virgula
+  preferredCity       String?
+  updatedAt           DateTime @updatedAt
+}
+
+model Category {
+  id          String   @id @default(cuid())
+  slug        String   @unique
+  name        String
+  description String?
+  icon        String?
+  color       String?
+  createdAt   DateTime @default(now())
+  fairs       Fair[]
+}
+
+model Fair {
+  id               String    @id @default(cuid())
+  slug             String    @unique
+  name             String
+  description      String
+  shortDescription String?
+  address          String
+  city             String
+  state            String    @default("AL")
+  zipCode          String?
+  latitude         Float?
+  longitude        Float?
+  coverImageUrl    String?
+  contactEmail     String?
+  contactPhone     String?
+  websiteUrl       String?
+  instagramUrl     String?
+  status           String    @default("DRAFT") // DRAFT | PENDING_REVIEW | PUBLISHED | REJECTED | ARCHIVED
+  rejectionReason  String?
+  isFeatured       Boolean   @default(false)
+  organizerId      String
+  organizer        User      @relation(fields: [organizerId], references: [id], onDelete: Cascade)
+  createdAt        DateTime  @default(now())
+  updatedAt        DateTime  @updatedAt
+  publishedAt      DateTime?
+
+  categories     Category[]
+  offerings      Offering[]
+  events         FairEvent[]
+  reviews        Review[]
+  comments       Comment[]
+  feedbacks      OrganizerFeedback[]
+  followers      Follow[]
+  advertisements Advertisement[]
+
+  @@index([status])
+  @@index([city])
+}
+
+model Offering {
+  id          String   @id @default(cuid())
+  fairId      String
+  fair        Fair     @relation(fields: [fairId], references: [id], onDelete: Cascade)
+  name        String
+  kind        String   @default("PRODUCT") // PRODUCT | SERVICE
+  description String?
+  priceRange  String?
+  createdAt   DateTime @default(now())
+}
+
+model FairEvent {
+  id        String    @id @default(cuid())
+  fairId    String
+  fair      Fair      @relation(fields: [fairId], references: [id], onDelete: Cascade)
+  title     String
+  startsAt  DateTime
+  endsAt    DateTime?
+  address   String?
+  latitude  Float?
+  longitude Float?
+  notes     String?
+  createdAt DateTime  @default(now())
+
+  @@index([startsAt])
+}
+
+model Review {
+  id        String    @id @default(cuid())
+  fairId    String
+  fair      Fair      @relation(fields: [fairId], references: [id], onDelete: Cascade)
+  authorId  String
+  author    User      @relation(fields: [authorId], references: [id], onDelete: Cascade)
+  rating    Int
+  title     String?
+  content   String
+  visitedAt DateTime?
+  status    String    @default("PUBLISHED") // PUBLISHED | PENDING | HIDDEN
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+
+  @@unique([fairId, authorId])
+}
+
+model Comment {
+  id        String    @id @default(cuid())
+  fairId    String
+  fair      Fair      @relation(fields: [fairId], references: [id], onDelete: Cascade)
+  authorId  String
+  author    User      @relation(fields: [authorId], references: [id], onDelete: Cascade)
+  parentId  String?
+  parent    Comment?  @relation("CommentReplies", fields: [parentId], references: [id])
+  replies   Comment[] @relation("CommentReplies")
+  content   String
+  status    String    @default("PUBLISHED")
+  createdAt DateTime  @default(now())
+}
+
+model OrganizerFeedback {
+  id                    String   @id @default(cuid())
+  fairId                String
+  fair                  Fair     @relation(fields: [fairId], references: [id], onDelete: Cascade)
+  authorId              String
+  author                User     @relation(fields: [authorId], references: [id], onDelete: Cascade)
+  experience            String
+  suggestions           String?
+  wouldParticipateAgain Boolean  @default(true)
+  organizationScore     Int      @default(5)
+  status                String   @default("PUBLISHED")
+  createdAt             DateTime @default(now())
+}
+
+model Follow {
+  id        String   @id @default(cuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  fairId    String
+  fair      Fair     @relation(fields: [fairId], references: [id], onDelete: Cascade)
+  createdAt DateTime @default(now())
+
+  @@unique([userId, fairId])
+}
+
+model Notification {
+  id        String    @id @default(cuid())
+  userId    String
+  user      User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  type      String
+  title     String
+  body      String?
+  link      String?
+  readAt    DateTime?
+  createdAt DateTime  @default(now())
+
+  @@index([userId])
+}
+
+model Advertisement {
+  id               String   @id @default(cuid())
+  fairId           String
+  fair             Fair     @relation(fields: [fairId], references: [id], onDelete: Cascade)
+  ownerId          String
+  owner            User     @relation(fields: [ownerId], references: [id], onDelete: Cascade)
+  title            String
+  description      String?
+  imageUrl         String?
+  tier             String   @default("BASIC") // BASIC | STANDARD | PREMIUM
+  status           String   @default("PENDING") // PENDING | ACTIVE | PAUSED | EXPIRED | REJECTED
+  startsAt         DateTime
+  endsAt           DateTime
+  dailyBudgetCents Int      @default(0)
+  impressions      Int      @default(0)
+  clicks           Int      @default(0)
+  createdAt        DateTime @default(now())
+
+  @@index([status])
+}
+
+model ModerationReport {
+  id             String    @id @default(cuid())
+  targetType     String // FAIR | REVIEW | COMMENT | FEEDBACK | USER
+  targetId       String
+  reporterId     String
+  reporter       User      @relation("Reporter", fields: [reporterId], references: [id], onDelete: Cascade)
+  reason         String
+  details        String?
+  status         String    @default("OPEN") // OPEN | RESOLVED | DISMISSED
+  resolutionNote String?
+  handledById    String?
+  handledBy      User?     @relation("Handler", fields: [handledById], references: [id])
+  createdAt      DateTime  @default(now())
+  resolvedAt     DateTime?
+}
+
+model Conversation {
+  id         String        @id @default(cuid())
+  userId     String?
+  user       User?         @relation(fields: [userId], references: [id], onDelete: SetNull)
+  sessionKey String        @unique
+  createdAt  DateTime      @default(now())
+  messages   ChatMessage[]
+}
+
+model ChatMessage {
+  id             String       @id @default(cuid())
+  conversationId String
+  conversation   Conversation @relation(fields: [conversationId], references: [id], onDelete: Cascade)
+  role           String // user | assistant
+  content        String
+  createdAt      DateTime     @default(now())
+}
+
+model AuditLog {
+  id         String   @id @default(cuid())
+  actorId    String?
+  actor      User?    @relation(fields: [actorId], references: [id], onDelete: SetNull)
+  action     String
+  entityType String?
+  entityId   String?
+  metadata   String?
+  ip         String?
+  createdAt  DateTime @default(now())
+
+  @@index([createdAt])
+}
