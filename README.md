@@ -233,51 +233,17 @@ A FeiraIA tem **4 modos**, definidos por `AI_PROVIDER` no `.env`:
 | `AI_PROVIDER` | O que faz | Exige chave? |
 |---|---|---|
 | `auto` (padrão) | Nuvem se houver `AI_API_KEY`; senão LLM local se a URL for localhost | não |
-| `local` | Endpoint **compatível com OpenAI** (KoboldCpp `/v1`, Ollama, LM Studio) | **não** |
-| `kobold` | Endpoint **nativo** do KoboldCpp (`/api/v1/generate`) | **não** |
-| `openai` | Nuvem (OpenAI ou equivalente) | sim |
+| `local` | Endpoint **compatível com OpenAI** (Ollama, LM Studio, KoboldCpp `/v1`, etc.) | **não** |
+| `openai` | Nuvem (OpenAI ou API compatível) | sim |
 | `none` | Somente o assistente local por regras (100% offline) | não |
 
 > **Importante:** se a resposta do LLM falhar (servidor desligado, timeout, erro), o chat **cai
 > automaticamente** no assistente local por regras. O site nunca quebra por causa da IA.
 
-### Usando seu KoboldCpp (recomendado para LLM local)
+### Usando um LLM local (endpoint compatível com OpenAI)
 
-1. Abra o KoboldCpp e carregue um modelo GGUF de instrução (ex.: `Qwen2.5-7B-Instruct`,
-   `Llama-3.1-8B-Instruct`, `Mistral-7B-Instruct`).
-2. Clique em **Launch**. Por padrão ele serve em **`http://localhost:5001`**.
-3. No arquivo `.env`:
-
-   ```bash
-   AI_PROVIDER="local"
-   AI_BASE_URL="http://localhost:5001/v1"
-   AI_MODEL="koboldcpp"
-   AI_API_KEY=""
-   AI_TIMEOUT_MS="60000"
-   ```
-
-4. Reinicie o site (`npm run dev`) e confirme: `curl http://localhost:3000/api/ia/status`.
-
-**Modo nativo (alternativa):** o KoboldCpp também tem o endpoint próprio. Use:
-
-```bash
-AI_PROVIDER="kobold"
-AI_BASE_URL="http://localhost:5001"
-```
-
-Se você iniciou o KoboldCpp com `--password`, coloque a senha em `AI_API_KEY` (o FeirAL envia
-`Authorization: Bearer <senha>`).
-
-> **Timeout:** no modo `kobold` o tempo de espera padrão é de **500s** — modelos grandes rodando
-> em hardware modesto (ex.: 4 GB de VRAM com offload para a RAM) podem demorar bastante para
-> gerar. Para ajustar, defina `AI_TIMEOUT_MS` no `.env` (em milissegundos).
-
-> **KoboldCpp em outra máquina/container:** aí a URL **não** é localhost e o modo `auto` não detecta
-> que é local — defina `AI_PROVIDER="local"` explicitamente e use o IP da máquina (ex.:
-> `http://192.168.0.10:5001/v1`). No KoboldCpp, habilite o host `0.0.0.0` (opção *Host* / `--host`)
-> para aceitar conexões externas.
-
-### Outros servidores locais
+Qualquer servidor local que exponha a API **compatível com OpenAI**
+(`/chat/completions`) funciona — **sem chave de API**. Os mais comuns:
 
 ```bash
 # Ollama
@@ -290,7 +256,21 @@ AI_MODEL="llama3.1"
 AI_PROVIDER="local"
 AI_BASE_URL="http://localhost:1234/v1"
 AI_MODEL="nome-do-modelo-carregado"
+
+# KoboldCpp (use o endpoint /v1 compatível com OpenAI que ele expõe)
+AI_PROVIDER="local"
+AI_BASE_URL="http://localhost:5001/v1"
+AI_MODEL="koboldcpp"   # o KoboldCpp ignora o nome do modelo; qualquer valor serve
 ```
+
+Depois reinicie o site (`npm run dev`) e confirme: `curl http://localhost:3000/api/ia/status`.
+
+> **LLM em outra máquina/container:** a URL não é localhost e o modo `auto` não detecta que é
+> local — defina `AI_PROVIDER="local"` explicitamente e use o IP da máquina
+> (ex.: `http://192.168.0.10:11434/v1`), habilitando o servidor a escutar em `0.0.0.0`.
+
+> **Timeout:** LLM local em hardware modesto pode demorar a gerar. O tempo de espera padrão é de
+> **60s**; para aumentar, defina `AI_TIMEOUT_MS` no `.env` (em milissegundos).
 
 ### Nuvem (OpenAI ou compatível)
 
@@ -307,7 +287,7 @@ AI_MODEL="gpt-4o-mini"
 
 ```bash
 curl http://localhost:3000/api/ia/status
-# {"provider":"local","baseUrl":"http://localhost:5001/v1","model":"koboldcpp",
+# {"provider":"local","baseUrl":"http://localhost:11434/v1","model":"llama3.1",
 #  "requiresKey":false,"hasKey":false,"reachable":true,"hints":["Endpoint acessivel..."]}
 ```
 
