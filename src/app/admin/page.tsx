@@ -7,7 +7,7 @@ import { ROLES } from "@/lib/constants";
 import { Badge, Card, PageHeader, Stat } from "@/components/ui";
 import { formatDateTime } from "@/lib/utils";
 
-export const metadata: Metadata = { title: "Visao geral administrativa" };
+export const metadata: Metadata = { title: "Visão geral administrativa" };
 
 export default async function AdminDashboard() {
   await requireRole(ROLES.ADMIN);
@@ -50,13 +50,13 @@ export default async function AdminDashboard() {
   return (
     <div className="space-y-6">
       <PageHeader
-        eyebrow="Administracao"
-        title="Visao geral da plataforma"
-        description="Monitore a atividade, gerencie conteudos e acompanhe a moderacao."
+        eyebrow="Administração"
+        title="Visão geral da plataforma"
+        description="Monitore a atividade, gerencie conteúdos e acompanhe a moderação."
       />
 
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-        <Stat label="Usuarios" value={users} hint={`${organizers} organizadores`} icon={<Users size={16} />} />
+        <Stat label="Usuários" value={users} hint={`${organizers} organizadores`} icon={<Users size={16} />} />
         <Stat
           label="Feirinhas"
           value={fairs}
@@ -65,22 +65,22 @@ export default async function AdminDashboard() {
           tone="success"
         />
         <Stat
-          label="Aguardando revisao"
+          label="Aguardando revisão"
           value={pendingReview}
           icon={<Activity size={16} />}
           tone={pendingReview > 0 ? "warning" : "neutral"}
         />
         <Stat
-          label="Denuncias abertas"
+          label="Denúncias abertas"
           value={openReports}
           icon={<Flag size={16} />}
           tone={openReports > 0 ? "danger" : "neutral"}
         />
-        <Stat label="Avaliacoes" value={reviews} icon={<Star size={16} />} tone="warning" />
-        <Stat label="Comentarios" value={comments} icon={<MessageSquare size={16} />} tone="info" />
-        <Stat label="Anuncios ativos" value={activeAds} icon={<Megaphone size={16} />} tone="brand" />
+        <Stat label="Avaliações" value={reviews} icon={<Star size={16} />} tone="warning" />
+        <Stat label="Comentários" value={comments} icon={<MessageSquare size={16} />} tone="info" />
+        <Stat label="Anúncios ativos" value={activeAds} icon={<Megaphone size={16} />} tone="brand" />
         <Stat
-          label="Impressoes de anuncios"
+          label="Impressões de anúncios"
           value={impressions.toLocaleString("pt-BR")}
           hint={`${clicks.toLocaleString("pt-BR")} cliques`}
           icon={<Megaphone size={16} />}
@@ -92,7 +92,7 @@ export default async function AdminDashboard() {
         <Card className="p-5 lg:col-span-2">
           <div className="flex items-center justify-between">
             <h2 className="text-base font-semibold text-ink-900">Atividade recente</h2>
-            <Link href="/admin/atividade" className="text-sm font-medium text-brand-700 hover:underline">
+            <Link href="/admin/atividade" className="text-sm font-medium text-brand-600 hover:underline">
               Ver tudo
             </Link>
           </div>

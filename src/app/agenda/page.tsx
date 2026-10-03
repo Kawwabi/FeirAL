@@ -73,7 +73,7 @@ export default async function AgendaPage({ searchParams }: { searchParams: Promi
             <input type="date" name="from" defaultValue={from ?? ""} className={fieldClass} />
           </label>
           <label className="block">
-            <span className="mb-1 block text-xs font-medium text-ink-600">Ate</span>
+            <span className="mb-1 block text-xs font-medium text-ink-600">Até</span>
             <input type="date" name="to" defaultValue={to ?? ""} className={fieldClass} />
           </label>
           <div className="flex items-end gap-2">
@@ -99,7 +99,7 @@ export default async function AgendaPage({ searchParams }: { searchParams: Promi
                   name="category"
                   value={cat.slug}
                   defaultChecked={selectedCats.includes(cat.slug)}
-                  className="h-3.5 w-3.5 rounded border-ink-300 text-brand-600"
+                  className="h-3.5 w-3.5 rounded border-ink-300 text-brand-500"
                 />
                 {cat.icon ? `${cat.icon} ` : ""}
                 {cat.name}
@@ -118,7 +118,7 @@ export default async function AgendaPage({ searchParams }: { searchParams: Promi
           <EmptyState
             icon={<Calendar size={28} />}
             title="Nenhum evento para os filtros selecionados"
-            description="Ajuste o periodo ou a cidade para ver mais resultados."
+            description="Ajuste o período ou a cidade para ver mais resultados."
           />
         ) : (
           <AgendaList grouped={grouped} />

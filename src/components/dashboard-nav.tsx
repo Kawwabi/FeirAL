@@ -9,7 +9,7 @@ export interface NavItem {
   label: string;
 }
 
-/** Navegacao lateral reutilizada nas areas de visitante, organizador e administrador. */
+/** Navegação lateral reutilizada nas áreas de visitante, organizador e administrador. */
 export function DashboardNav({ items }: { items: NavItem[] }) {
   const pathname = usePathname();
 
@@ -23,7 +23,7 @@ export function DashboardNav({ items }: { items: NavItem[] }) {
             href={item.href}
             className={cn(
               "whitespace-nowrap rounded-lg px-3 py-2 text-sm font-medium transition-colors",
-              active ? "bg-brand-600 text-white" : "text-ink-600 hover:bg-ink-100",
+              active ? "bg-brand-500 text-white" : "text-ink-600 hover:bg-ink-100",
             )}
           >
             {item.label}

@@ -47,7 +47,7 @@ function Composer({
   if (!currentUserId) {
     return (
       <p className="rounded-lg bg-ink-50 px-3 py-2 text-sm text-ink-500">
-        <a href="/entrar" className="font-medium text-brand-700 hover:underline">
+        <a href="/entrar" className="font-medium text-brand-600 hover:underline">
           Entre
         </a>{" "}
         para comentar.
@@ -163,7 +163,7 @@ function ReplyToggle({
   ) : (
     <button
       onClick={() => setOpen(true)}
-      className="inline-flex items-center gap-1 text-xs font-medium text-ink-500 hover:text-brand-700"
+      className="inline-flex items-center gap-1 text-xs font-medium text-ink-500 hover:text-brand-600"
     >
       <CornerDownRight size={13} /> Responder
     </button>
@@ -184,17 +184,17 @@ export function CommentSection({
   return (
     <div className="space-y-5">
       <h3 className="inline-flex items-center gap-2 text-lg font-semibold text-ink-900">
-        <MessageSquare size={18} /> Comentarios ({comments.length})
+        <MessageSquare size={18} /> Comentários ({comments.length})
       </h3>
 
       <Composer
         fairId={fairId}
         currentUserId={currentUserId}
-        placeholder="Compartilhe uma duvida ou dica sobre esta feirinha..."
+        placeholder="Compartilhe uma dúvida ou dica sobre esta feirinha..."
       />
 
       {comments.length === 0 ? (
-        <p className="text-sm text-ink-500">Ainda nao ha comentarios. Seja o primeiro a comentar!</p>
+        <p className="text-sm text-ink-500">Ainda não há comentários. Seja o primeiro a comentar!</p>
       ) : (
         <div className="space-y-5">
           {comments.map((comment) => (

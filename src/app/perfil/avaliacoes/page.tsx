@@ -7,7 +7,7 @@ import { deleteReviewAction } from "@/app/actions/community";
 import { formatDate } from "@/lib/utils";
 import { Badge, Card, EmptyState, PageHeader, buttonClass } from "@/components/ui";
 
-export const metadata: Metadata = { title: "Minhas avaliacoes" };
+export const metadata: Metadata = { title: "Minhas avaliações" };
 
 export default async function MyReviewsPage() {
   const user = await requireUser();
@@ -21,15 +21,15 @@ export default async function MyReviewsPage() {
     <div className="space-y-6">
       <PageHeader
         eyebrow="Minha conta"
-        title="Minhas avaliacoes"
-        description="Avaliacoes e comentarios que voce publicou sobre as feirinhas."
+        title="Minhas avaliações"
+        description="Avaliações e comentários que você publicou sobre as feirinhas."
       />
 
       {reviews.length === 0 ? (
         <EmptyState
           icon={<Star size={28} />}
-          title="Voce ainda nao avaliou nenhuma feirinha"
-          description="Visite uma feirinha e compartilhe sua experiencia para ajudar outras pessoas."
+          title="Você ainda não avaliou nenhuma feirinha"
+          description="Visite uma feirinha e compartilhe sua experiência para ajudar outras pessoas."
           action={
             <Link href="/feirinhas" className={buttonClass("primary")}>
               Explorar feirinhas
@@ -44,7 +44,7 @@ export default async function MyReviewsPage() {
                 <div>
                   <Link
                     href={`/feirinhas/${review.fair.slug}`}
-                    className="font-semibold text-ink-900 hover:text-brand-700"
+                    className="font-semibold text-ink-900 hover:text-brand-600"
                   >
                     {review.fair.name}
                   </Link>

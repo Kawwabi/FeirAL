@@ -40,14 +40,14 @@ export function FilterForm({
 
       <div className="mt-4 grid gap-4 md:grid-cols-2 lg:grid-cols-4">
         <label className="block lg:col-span-2">
-          <span className="mb-1 block text-xs font-medium text-ink-600">Buscar por nome ou descricao</span>
+          <span className="mb-1 block text-xs font-medium text-ink-600">Buscar por nome ou descrição</span>
           <div className="relative">
             <Search size={15} className="absolute left-3 top-1/2 -translate-y-1/2 text-ink-400" />
             <input
               type="search"
               name="q"
               defaultValue={values.q ?? ""}
-              placeholder="Ex.: artesanato, forro, culinaria..."
+              placeholder="Ex.: artesanato, forro, culinária..."
               className={`${fieldClass} pl-9`}
             />
           </div>
@@ -83,14 +83,14 @@ export function FilterForm({
           {categories.map((cat) => (
             <label
               key={cat.slug}
-              className="inline-flex cursor-pointer items-center gap-1.5 rounded-full border border-ink-200 bg-white px-3 py-1.5 text-xs font-medium text-ink-700 has-checked:border-brand-400 has-checked:bg-brand-50 has-checked:text-brand-700"
+              className="inline-flex cursor-pointer items-center gap-1.5 rounded-full border border-ink-200 bg-white px-3 py-1.5 text-xs font-medium text-ink-700 has-checked:border-brand-400 has-checked:bg-brand-50 has-checked:text-brand-600"
             >
               <input
                 type="checkbox"
                 name="category"
                 value={cat.slug}
                 defaultChecked={selected.includes(cat.slug)}
-                className="h-3.5 w-3.5 rounded border-ink-300 text-brand-600"
+                className="h-3.5 w-3.5 rounded border-ink-300 text-brand-500"
               />
               {cat.icon ? `${cat.icon} ` : ""}
               {cat.name}
@@ -106,7 +106,7 @@ export function FilterForm({
             name="upcoming"
             value="1"
             defaultChecked={values.upcoming === "1"}
-            className="h-4 w-4 rounded border-ink-300 text-brand-600"
+            className="h-4 w-4 rounded border-ink-300 text-brand-500"
           />
           Somente com evento futuro
         </label>
@@ -120,7 +120,7 @@ export function FilterForm({
           </Link>
           <button
             type="submit"
-            className="rounded-lg bg-brand-600 px-4 py-2 text-sm font-medium text-white hover:bg-brand-700"
+            className="rounded-lg bg-brand-500 px-4 py-2 text-sm font-medium text-white hover:bg-brand-600"
           >
             Aplicar filtros
           </button>

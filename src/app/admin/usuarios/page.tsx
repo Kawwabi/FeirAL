@@ -7,7 +7,7 @@ import { updateUserRoleAction } from "@/app/actions/admin";
 import { Badge, Card, PageHeader } from "@/components/ui";
 import { formatDate } from "@/lib/utils";
 
-export const metadata: Metadata = { title: "Gestao de usuarios" };
+export const metadata: Metadata = { title: "Gestão de usuários" };
 
 const ROLE_TONES: Record<string, "brand" | "neutral" | "info" | "danger"> = {
   VISITOR: "neutral",
@@ -27,15 +27,15 @@ export default async function AdminUsersPage() {
   return (
     <div className="space-y-6">
       <PageHeader
-        eyebrow="Administracao"
-        title="Usuarios"
-        description="Gerencie papeis de acesso. Visitantes podem se tornar organizadores, e vice-versa."
+        eyebrow="Administração"
+        title="Usuários"
+        description="Gerencie papéis de acesso. Visitantes podem se tornar organizadores, e vice-versa."
       />
 
       <Card className="overflow-hidden">
         <div className="flex items-center gap-2 border-b border-ink-100 p-5">
-          <Users size={18} className="text-brand-600" />
-          <h2 className="text-base font-semibold text-ink-900">{users.length} usuarios</h2>
+          <Users size={18} className="text-brand-500" />
+          <h2 className="text-base font-semibold text-ink-900">{users.length} usuários</h2>
         </div>
         <div className="divide-y divide-ink-100">
           {users.map((user) => (
@@ -51,7 +51,7 @@ export default async function AdminUsersPage() {
                   {user.email} - cadastrado em {formatDate(user.createdAt)}
                 </p>
                 <p className="text-xs text-ink-400">
-                  {user._count.fairs} feirinhas - {user._count.reviews} avaliacoes - {user._count.comments} comentarios
+                  {user._count.fairs} feirinhas - {user._count.reviews} avaliações - {user._count.comments} comentários
                 </p>
               </div>
 
@@ -81,7 +81,7 @@ export default async function AdminUsersPage() {
       </Card>
 
       <p className="text-xs text-ink-400">
-        Observacao: voce nao pode alterar o seu proprio papel de administrador enquanto estiver logado.
+        Observação: você não pode alterar o seu próprio papel de administrador enquanto estiver logado.
       </p>
     </div>
   );

@@ -33,12 +33,12 @@ export default async function OrganizerFeedbackPage() {
       <PageHeader
         eyebrow="Organizador"
         title="Feedbacks dos organizadores"
-        description="Veja o que outros organizadores acharam das suas feirinhas e as sugestoes de melhoria."
+        description="Veja o que outros organizadores acharam das suas feirinhas e as sugestões de melhoria."
       />
 
       <div className="grid gap-4 sm:grid-cols-3">
         <Stat label="Feedbacks" value={feedbacks.length} icon={<Lightbulb size={16} />} />
-        <Stat label="Nota media" value={avg.toFixed(1)} hint="organizacao (1-5)" tone="success" />
+        <Stat label="Nota média" value={avg.toFixed(1)} hint="organização (1-5)" tone="success" />
         <Stat label="Participariam novamente" value={wouldReturn} tone="brand" />
       </div>
 
@@ -46,7 +46,7 @@ export default async function OrganizerFeedbackPage() {
         <EmptyState
           icon={<Lightbulb size={28} />}
           title="Nenhum feedback recebido"
-          description="Quando outros organizadores avaliarem sua feirinha, os feedbacks aparecerao aqui."
+          description="Quando outros organizadores avaliarem sua feirinha, os feedbacks aparecerão aqui."
         />
       ) : (
         <div className="space-y-3">
@@ -57,13 +57,13 @@ export default async function OrganizerFeedbackPage() {
                   <span className="text-sm font-semibold text-ink-800">{feedback.author.name}</span>
                   <Link
                     href={`/feirinhas/${feedback.fair.slug}`}
-                    className="text-xs font-medium text-brand-700 hover:underline"
+                    className="text-xs font-medium text-brand-600 hover:underline"
                   >
                     {feedback.fair.name}
                   </Link>
                 </div>
                 <div className="flex flex-wrap items-center gap-2">
-                  <Badge tone="info">organizacao {feedback.organizationScore}/5</Badge>
+                  <Badge tone="info">organização {feedback.organizationScore}/5</Badge>
                   <Badge tone={feedback.wouldParticipateAgain ? "success" : "neutral"}>
                     {feedback.wouldParticipateAgain ? (
                       <>
@@ -71,7 +71,7 @@ export default async function OrganizerFeedbackPage() {
                       </>
                     ) : (
                       <>
-                        <X size={11} /> Nao participaria
+                        <X size={11} /> Não participaria
                       </>
                     )}
                   </Badge>
@@ -81,7 +81,7 @@ export default async function OrganizerFeedbackPage() {
               <p className="mt-2 whitespace-pre-line text-sm text-ink-600">{feedback.experience}</p>
               {feedback.suggestions ? (
                 <p className="mt-2 rounded-lg bg-ink-50 p-3 text-xs text-ink-600">
-                  <strong>Sugestoes de melhoria:</strong> {feedback.suggestions}
+                  <strong>Sugestões de melhoria:</strong> {feedback.suggestions}
                 </p>
               ) : null}
             </Card>

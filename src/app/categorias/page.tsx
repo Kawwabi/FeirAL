@@ -28,7 +28,7 @@ export default async function CategoriesPage() {
               <div className="flex items-center gap-3">
                 <span
                   className="grid h-12 w-12 place-items-center rounded-xl text-2xl"
-                  style={{ backgroundColor: `${cat.color ?? "#ea580c"}22` }}
+                  style={{ backgroundColor: `${cat.color ?? "#FF7001"}22` }}
                 >
                   {cat.icon ?? "🛍️"}
                 </span>

@@ -4,7 +4,7 @@ export function cn(...inputs: ClassValue[]) {
   return clsx(inputs);
 }
 
-/** Gera um slug amigavel para URL a partir de um texto. */
+/** Gera um slug amigável para URL a partir de um texto. */
 export function slugify(input: string): string {
   return input
     .normalize("NFD")
@@ -58,7 +58,7 @@ export function formatTime(value: Date | string | null | undefined): string {
   return d.toLocaleTimeString("pt-BR", { hour: "2-digit", minute: "2-digit" });
 }
 
-/** Distancia aproximada em km entre duas coordenadas (formula de Haversine). */
+/** Distância aproximada em km entre duas coordenadas (formula de Haversine). */
 export function haversineKm(
   lat1: number,
   lon1: number,
@@ -102,7 +102,7 @@ export function truncate(text: string, max = 140): string {
   return `${text.slice(0, max - 1).trimEnd()}…`;
 }
 
-/** Retorna a URL de capa ou uma imagem padrao local. */
+/** Retorna a URL de capa ou uma imagem padrão local. */
 export function coverImage(url?: string | null): string {
   return url && url.trim().length > 0 ? url : "/covers/default.svg";
 }

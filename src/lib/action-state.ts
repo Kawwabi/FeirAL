@@ -7,7 +7,7 @@ export interface ActionState {
 
 export const initialActionState: ActionState = { ok: false };
 
-/** Converte um erro de validacao Zod em um mapa de mensagens por campo. */
+/** Converte um erro de validação Zod em um mapa de mensagens por campo. */
 export function fieldErrors(issues: { path: (string | number | symbol)[]; message: string }[]) {
   const errors: Record<string, string> = {};
   for (const issue of issues) {

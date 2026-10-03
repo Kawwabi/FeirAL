@@ -13,7 +13,7 @@ const optionalString = z.preprocess(
 
 const optionalEmail = z.preprocess(
   (v) => (v === "" || v === null || v === undefined ? undefined : v),
-  z.string().email("E-mail invalido").optional(),
+  z.string().email("E-mail inválido").optional(),
 );
 
 export const registerSchema = z.object({
@@ -32,7 +32,7 @@ export const loginSchema = z.object({
 export const profileSchema = z.object({
   name: z.string().min(2, "Informe seu nome."),
   city: z.string().optional(),
-  bio: z.string().max(400, "A bio deve ter no maximo 400 caracteres.").optional(),
+  bio: z.string().max(400, "A bio deve ter no máximo 400 caracteres.").optional(),
   avatarUrl: z.string().optional(),
 });
 
@@ -54,8 +54,8 @@ const offeringSchema = z.object({
 });
 
 const eventSchema = z.object({
-  title: z.string().min(2, "Informe o titulo do evento."),
-  startsAt: z.string().min(1, "Informe a data/hora de inicio."),
+  title: z.string().min(2, "Informe o título do evento."),
+  startsAt: z.string().min(1, "Informe a data/hora de início."),
   endsAt: z.string().optional(),
   address: z.string().optional(),
   notes: z.string().optional(),
@@ -65,7 +65,7 @@ export const fairSchema = z.object({
   name: z.string().min(3, "O nome precisa ter ao menos 3 caracteres."),
   shortDescription: z.string().max(180, "Resumo muito longo.").optional(),
   description: z.string().min(20, "Descreva a feirinha com ao menos 20 caracteres."),
-  address: z.string().min(3, "Informe o endereco."),
+  address: z.string().min(3, "Informe o endereço."),
   city: z.string().min(2, "Informe a cidade."),
   state: z.string().default("AL"),
   zipCode: optionalString,
@@ -84,7 +84,7 @@ export const fairSchema = z.object({
 export const reviewSchema = z.object({
   fairId: z.string().min(1),
   rating: z.coerce.number().int().min(1, "Escolha de 1 a 5 estrelas.").max(5),
-  title: z.string().max(120, "Titulo muito longo.").optional(),
+  title: z.string().max(120, "Título muito longo.").optional(),
   content: z.string().min(5, "Escreva pelo menos 5 caracteres."),
   visitedAt: z.string().optional(),
 });
@@ -92,12 +92,12 @@ export const reviewSchema = z.object({
 export const commentSchema = z.object({
   fairId: z.string().min(1),
   parentId: z.string().optional(),
-  content: z.string().min(2, "Escreva um comentario."),
+  content: z.string().min(2, "Escreva um comentário."),
 });
 
 export const feedbackSchema = z.object({
   fairId: z.string().min(1),
-  experience: z.string().min(5, "Conte como foi sua experiencia."),
+  experience: z.string().min(5, "Conte como foi sua experiência."),
   suggestions: z.string().optional(),
   wouldParticipateAgain: z.coerce.boolean().default(false),
   organizationScore: z.coerce.number().int().min(1).max(5).default(5),
@@ -105,12 +105,12 @@ export const feedbackSchema = z.object({
 
 export const adSchema = z.object({
   fairId: z.string().min(1, "Selecione a feirinha."),
-  title: z.string().min(3, "Informe um titulo para o anuncio."),
-  description: z.string().max(240, "Descricao muito longa.").optional(),
+  title: z.string().min(3, "Informe um título para o anúncio."),
+  description: z.string().max(240, "Descrição muito longa.").optional(),
   imageUrl: z.string().optional(),
   tier: z.enum([AD_TIERS.BASIC, AD_TIERS.STANDARD, AD_TIERS.PREMIUM]).default(AD_TIERS.BASIC),
-  startsAt: z.string().min(1, "Informe a data de inicio."),
-  endsAt: z.string().min(1, "Informe a data de termino."),
+  startsAt: z.string().min(1, "Informe a data de início."),
+  endsAt: z.string().min(1, "Informe a data de término."),
 });
 
 export const reportSchema = z.object({
@@ -133,7 +133,7 @@ export const passwordResetRequestSchema = z.object({
 });
 
 export const passwordResetSchema = z.object({
-  token: z.string().min(10, "Token invalido."),
+  token: z.string().min(10, "Token inválido."),
   password: z.string().min(6, "A nova senha precisa ter ao menos 6 caracteres."),
 });
 

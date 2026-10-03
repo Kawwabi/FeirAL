@@ -7,7 +7,7 @@ const outDir = join(here, "..", "public", "covers");
 mkdirSync(outDir, { recursive: true });
 
 const covers = [
-  { file: "default.svg", from: "#fb923c", to: "#9a3412", label: "FeirAL" },
+  { file: "default.svg", from: "#FF7001", to: "#743606", label: "FeirAL" },
   { file: "artesanato.svg", from: "#fbbf24", to: "#b45309", label: "Artesanato" },
   { file: "alimentos.svg", from: "#f87171", to: "#991b1b", label: "Alimentos" },
   { file: "moda.svg", from: "#f472b6", to: "#9d174d", label: "Moda" },

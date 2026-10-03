@@ -10,7 +10,7 @@ import { EmptyState, PageHeader, buttonClass } from "@/components/ui";
 
 export const metadata: Metadata = {
   title: "Feirinhas de Alagoas",
-  description: "Explore todas as feirinhas de Alagoas com filtros por localizacao, data e categoria.",
+  description: "Explore todas as feirinhas de Alagoas com filtros por localização, data e categoria.",
 };
 
 export default async function FairsPage({
@@ -62,7 +62,7 @@ export default async function FairsPage({
       <PageHeader
         eyebrow="Explorar"
         title="Feirinhas de Alagoas"
-        description="Filtre por localizacao, data e tipo de feira para encontrar o que combina com voce."
+        description="Filtre por localização, data e tipo de feira para encontrar o que combina com você."
         action={
           <Link href="/mapa" className={buttonClass("outline")}>
             <Store size={16} /> Ver no mapa
@@ -87,7 +87,7 @@ export default async function FairsPage({
           <Link
             href={buildViewLink("grid")}
             className={`inline-flex items-center gap-1 rounded px-2 py-1 text-xs font-medium ${
-              view === "grid" ? "bg-brand-600 text-white" : "text-ink-600 hover:bg-ink-100"
+              view === "grid" ? "bg-brand-500 text-white" : "text-ink-600 hover:bg-ink-100"
             }`}
           >
             <LayoutGrid size={13} /> Grade
@@ -95,7 +95,7 @@ export default async function FairsPage({
           <Link
             href={buildViewLink("list")}
             className={`inline-flex items-center gap-1 rounded px-2 py-1 text-xs font-medium ${
-              view === "list" ? "bg-brand-600 text-white" : "text-ink-600 hover:bg-ink-100"
+              view === "list" ? "bg-brand-500 text-white" : "text-ink-600 hover:bg-ink-100"
             }`}
           >
             <List size={13} /> Lista

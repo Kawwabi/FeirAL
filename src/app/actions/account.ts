@@ -54,7 +54,7 @@ export async function updateProfileAction(_prev: ActionState, formData: FormData
   try {
     user = await requireUser();
   } catch {
-    return { ok: false, message: "Faca login novamente." };
+    return { ok: false, message: "Faça login novamente." };
   }
 
   const parsed = profileSchema.safeParse({
@@ -88,7 +88,7 @@ export async function updatePreferencesAction(_prev: ActionState, formData: Form
   try {
     user = await requireUser();
   } catch {
-    return { ok: false, message: "Faca login novamente." };
+    return { ok: false, message: "Faça login novamente." };
   }
 
   const parsed = preferencesSchema.safeParse({
@@ -102,7 +102,7 @@ export async function updatePreferencesAction(_prev: ActionState, formData: Form
   });
 
   if (!parsed.success) {
-    return { ok: false, message: "Confira as preferencias.", errors: fieldErrors(parsed.error.issues) };
+    return { ok: false, message: "Confira as preferências.", errors: fieldErrors(parsed.error.issues) };
   }
 
   const data = parsed.data;
@@ -135,5 +135,5 @@ export async function updatePreferencesAction(_prev: ActionState, formData: Form
 
   await logAudit({ actorId: user.id, action: "PREFERENCES_UPDATED", entityType: "User", entityId: user.id });
   revalidatePath("/perfil/preferencias");
-  return { ok: true, message: "Preferencias de notificacao salvas." };
+  return { ok: true, message: "Preferências de notificação salvas." };
 }

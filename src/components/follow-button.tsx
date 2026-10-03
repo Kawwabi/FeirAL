@@ -2,7 +2,7 @@ import Link from "next/link";
 import { Heart, HeartOff, Star } from "lucide-react";
 import { toggleFollowAction } from "@/app/actions/account";
 
-/** Botao de acompanhar feirinha (seguir). Renderizado no servidor, sem JS no cliente. */
+/** Botão de acompanhar feirinha (seguir). Renderizado no servidor, sem JS no cliente. */
 export function FollowButton({
   fairId,
   slug,
@@ -49,7 +49,7 @@ export function RatingInline({ average, count }: { average: number; count: numbe
     <span className="inline-flex items-center gap-1 text-sm text-ink-600">
       <Star size={14} className="text-amber-400" fill="currentColor" />
       <strong className="font-semibold text-ink-800">{average.toFixed(1)}</strong>
-      <span className="text-ink-400">({count} avaliacoes)</span>
+      <span className="text-ink-400">({count} avaliações)</span>
     </span>
   );
 }

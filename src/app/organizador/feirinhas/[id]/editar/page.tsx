@@ -42,12 +42,12 @@ export default async function EditFairPage({
       <PageHeader
         eyebrow="Organizador"
         title={`Editar: ${fair.name}`}
-        description="Atualize as informacoes, adicione eventos ou envie novamente para aprovacao."
+        description="Atualize as informações, adicione eventos ou envie novamente para aprovação."
         action={
           <div className="flex items-center gap-2">
             <FairStatusBadge status={fair.status} />
             <Link href={`/feirinhas/${fair.slug}`} className={buttonClass("ghost", "sm")}>
-              <ExternalLink size={14} /> Ver pagina
+              <ExternalLink size={14} /> Ver página
             </Link>
           </div>
         }
@@ -61,7 +61,7 @@ export default async function EditFairPage({
 
       {fair.rejectionReason ? (
         <Card className="border-red-200 p-4">
-          <p className="text-sm font-medium text-red-700">Ajustes solicitados pela moderacao</p>
+          <p className="text-sm font-medium text-red-700">Ajustes solicitados pela moderação</p>
           <p className="mt-1 text-sm text-red-600">{fair.rejectionReason}</p>
         </Card>
       ) : null}
@@ -69,12 +69,12 @@ export default async function EditFairPage({
       {fair.status === "PUBLISHED" || fair.status === "PENDING_REVIEW" ? null : (
         <Card className="flex flex-wrap items-center justify-between gap-3 p-4">
           <p className="text-sm text-ink-600">
-            Quando estiver pronto, envie a feirinha para aprovacao e ela ficara visivel publicamente.
+            Quando estiver pronto, envie a feirinha para aprovação e ela ficara visível publicamente.
           </p>
           <form action={submitFairForReviewAction}>
             <input type="hidden" name="fairId" value={fair.id} />
             <button type="submit" className={buttonClass("success", "sm")}>
-              <Send size={14} /> Enviar para aprovacao
+              <Send size={14} /> Enviar para aprovação
             </button>
           </form>
         </Card>

@@ -5,9 +5,9 @@ import { DashboardNav } from "@/components/dashboard-nav";
 const NAV = [
   { href: "/perfil", label: "Meu perfil" },
   { href: "/perfil/favoritos", label: "Acompanho" },
-  { href: "/perfil/avaliacoes", label: "Avaliacoes" },
-  { href: "/perfil/notificacoes", label: "Notificacoes" },
-  { href: "/perfil/preferencias", label: "Preferencias" },
+  { href: "/perfil/avaliacoes", label: "Avaliações" },
+  { href: "/perfil/notificacoes", label: "Notificações" },
+  { href: "/perfil/preferencias", label: "Preferências" },
 ];
 
 export default async function ProfileLayout({ children }: { children: React.ReactNode }) {

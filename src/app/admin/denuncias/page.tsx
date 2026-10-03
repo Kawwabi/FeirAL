@@ -9,7 +9,7 @@ import { ReportStatusBadge } from "@/components/status-badge";
 import { Badge, Card, EmptyState, PageHeader, buttonClass } from "@/components/ui";
 import { formatDateTime } from "@/lib/utils";
 
-export const metadata: Metadata = { title: "Fila de moderacao" };
+export const metadata: Metadata = { title: "Fila de moderação" };
 
 export default async function AdminReportsPage() {
   await requireRole(ROLES.ADMIN);
@@ -25,9 +25,9 @@ export default async function AdminReportsPage() {
   return (
     <div className="space-y-8">
       <PageHeader
-        eyebrow="Administracao"
-        title="Denuncias e moderacao"
-        description="Analise as denuncias dos usuarios, oculte conteudos inadequados e registre a resolucao."
+        eyebrow="Administração"
+        title="Denúncias e moderação"
+        description="Analise as denúncias dos usuários, oculte conteúdos inadequados e registre a resolução."
       />
 
       <section>
@@ -35,7 +35,7 @@ export default async function AdminReportsPage() {
           <Flag size={16} className="text-red-600" /> Abertas ({open.length})
         </h2>
         {open.length === 0 ? (
-          <EmptyState title="Nenhuma denuncia aberta" description="A comunidade esta tranquila por aqui." />
+          <EmptyState title="Nenhuma denúncia aberta" description="A comunidade está tranquila por aqui." />
         ) : (
           <div className="space-y-3">
             {open.map((report) => (
@@ -55,7 +55,7 @@ export default async function AdminReportsPage() {
                       <p className="mt-2 rounded-lg bg-ink-50 p-2 text-sm text-ink-600">{report.details}</p>
                     ) : null}
                     <p className="mt-1 text-xs text-ink-400">
-                      ID do conteudo: {report.targetId}
+                      ID do conteúdo: {report.targetId}
                     </p>
                   </div>
 
@@ -65,7 +65,7 @@ export default async function AdminReportsPage() {
                         <input type="hidden" name="type" value={report.targetType} />
                         <input type="hidden" name="id" value={report.targetId} />
                         <button type="submit" className={buttonClass("outline", "sm", "w-full")}>
-                          <Eye size={14} /> Ocultar conteudo
+                          <Eye size={14} /> Ocultar conteúdo
                         </button>
                       </form>
                     ) : null}
@@ -75,7 +75,7 @@ export default async function AdminReportsPage() {
                       <input type="hidden" name="status" value="RESOLVED" />
                       <input
                         name="note"
-                        placeholder="Observacao da resolucao (opcional)"
+                        placeholder="Observação da resolução (opcional)"
                         className="w-full rounded-lg border border-ink-300 px-3 py-2 text-sm"
                       />
                       <div className="flex gap-2">
@@ -101,10 +101,10 @@ export default async function AdminReportsPage() {
       </section>
 
       <section>
-        <h2 className="mb-3 text-base font-semibold text-ink-900">Historico ({closed.length})</h2>
+        <h2 className="mb-3 text-base font-semibold text-ink-900">Histórico ({closed.length})</h2>
         <Card className="overflow-hidden">
           {closed.length === 0 ? (
-            <p className="p-6 text-sm text-ink-500">Sem historico.</p>
+            <p className="p-6 text-sm text-ink-500">Sem histórico.</p>
           ) : (
             <div className="divide-y divide-ink-100">
               {closed.map((report) => (

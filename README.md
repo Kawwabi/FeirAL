@@ -6,7 +6,7 @@ Alagoas. Visitantes descobrem feirinhas pelo **mapa interativo**, pela **agenda 
 patrocinados**; administradores moderam conteúdo e monitoram a plataforma; e um **assistente de IA**
 (FeiraIA) conversa com os visitantes.
 
-Desenvolvido como **Projeto Integrador VI**.
+Desenvolvido por **Vinícius Stanley** como **Projeto Integrador VI** da CESMAC.
 
 ---
 
@@ -66,6 +66,52 @@ Acesse **http://localhost:3000**.
 | `npm run db:push` | Sincroniza o schema com o banco |
 | `npm run db:seed` | Popula o banco com dados de exemplo |
 | `npm run db:reset` | Recria o banco do zero e popula novamente |
+
+### Como testar rapidamente (automático)
+
+Com o site rodando (`npm run dev`, em outro terminal):
+
+```bash
+# 1) Verificações do código
+npm run typecheck        # tipos TypeScript
+npm test                 # 50 testes das regras de dominio
+npm run build            # compila para producao
+
+# 2) O site respondeu?
+curl -o /dev/null -w '%{http_code}\n' http://localhost:3000/            # 200
+curl -o /dev/null -w '%{http_code}\n' http://localhost:3000/feirinhas   # 200
+curl -o /dev/null -w '%{http_code}\n' http://localhost:3000/mapa        # 200
+curl -o /dev/null -w '%{http_code}\n' http://localhost:3000/agenda      # 200
+
+# 3) Area protegida sem login deve redirecionar (307)
+curl -o /dev/null -w '%{http_code}\n' http://localhost:3000/admin
+
+# 4) Exports e IA
+curl http://localhost:3000/api/agenda/ics | head -3
+curl http://localhost:3000/api/ia/status
+curl -X POST http://localhost:3000/api/ia/chat \
+  -H 'Content-Type: application/json' \
+  -d '{"message":"Qual a agenda de eventos?","history":[]}'
+```
+
+### Como testar rapidamente (manual — roteiro sugerido)
+
+1. **Home** (`/`): destaques, patrocinados e próximos eventos aparecem com dados do seed.
+2. **Feirinhas** (`/feirinhas`): filtre por categoria "Artesanato", por cidade "Maceió" e por data;
+   alterne entre **Grade** e **Lista**.
+3. **Mapa** (`/mapa`): os marcadores aparecem em Maceió/Arapiraca/Penedo; clique em um para ver o popup.
+4. **Agenda** (`/agenda`): eventos agrupados por dia; clique em **Google Agenda** (abre nova aba) e em
+   **Assinar agenda (.ics)** (baixa o arquivo).
+5. **Login**: entre com `carla@feiral.app` / `senha123`; depois abra uma feirinha e **avalie com
+   estrelas** e **comente**; clique em **Acompanhar feirinha**.
+6. **Perfil**: veja a feirinha em *Acompanho*, sua avaliação em *Avaliações* e ajuste as
+   *Preferências de notificação*.
+7. **Organizador**: saia e entre com `maria@feiral.app` / `senha123` → **Painel** → crie uma feirinha
+   (**Nova feirinha**, salve como rascunho e depois envie para aprovação) → veja em **Anúncios**.
+8. **Moderação**: entre com `admin@feiral.app` → **Feirinhas e moderação** → aprove a feirinha que você
+   enviou; veja **Denúncias**, **Anúncios**, **Usuários** e **Atividade**.
+9. **IA**: clique no botão flutuante "Fale com a FeiraIA" (canto inferior direito) e pergunte
+   *"Tem feirinha de artesanato em Maceió?"* ou *"Como faço para anunciar minha feirinha?"*.
 
 ---
 
@@ -156,6 +202,7 @@ src/
     actions/             # Server Actions (auth, fairs, community, account, ads, admin)
     api/
       ia/chat/           # endpoint do chatbot
+      ia/status/         # diagnóstico do provedor de IA
       agenda/ics/        # exportação .ics
       ads/[id]/click/    # contagem de cliques em anúncios
       logout/            # encerra a sessão
@@ -170,7 +217,8 @@ src/
     filters.ts           # filtragem de feirinhas (testado)
     ratings.ts           # agregação de avaliações (testado)
     calendar.ts          # Google Agenda + .ics (testado)
-    ai.ts                # camada de IA (provedor + fallback local)
+    ai.ts                # camada de IA (chamadas + fallback local)
+    ai-config.ts         # resolução de configuração da IA (módulo puro, testável)
     validation.ts        # schemas Zod
     constants.ts         # categorias, status, planos de anúncio
 tests/                   # testes Vitest das regras de domínio
@@ -178,19 +226,93 @@ tests/                   # testes Vitest das regras de domínio
 
 ---
 
-## 7. Configuração da IA (opcional)
+## 7. IA (FeiraIA): LLM local ou nuvem
 
-Por padrão o chat usa o **assistente local** (sem chave de API). Para usar um modelo de linguagem,
-preencha no arquivo `.env`:
+A FeiraIA tem **4 modos**, definidos por `AI_PROVIDER` no `.env`:
+
+| `AI_PROVIDER` | O que faz | Exige chave? |
+|---|---|---|
+| `auto` (padrão) | Nuvem se houver `AI_API_KEY`; senão LLM local se a URL for localhost | não |
+| `local` | Endpoint **compatível com OpenAI** (KoboldCpp `/v1`, Ollama, LM Studio) | **não** |
+| `kobold` | Endpoint **nativo** do KoboldCpp (`/api/v1/generate`) | **não** |
+| `openai` | Nuvem (OpenAI ou equivalente) | sim |
+| `none` | Somente o assistente local por regras (100% offline) | não |
+
+> **Importante:** se a resposta do LLM falhar (servidor desligado, timeout, erro), o chat **cai
+> automaticamente** no assistente local por regras. O site nunca quebra por causa da IA.
+
+### Usando seu KoboldCpp (recomendado para LLM local)
+
+1. Abra o KoboldCpp e carregue um modelo GGUF de instrução (ex.: `Qwen2.5-7B-Instruct`,
+   `Llama-3.1-8B-Instruct`, `Mistral-7B-Instruct`).
+2. Clique em **Launch**. Por padrão ele serve em **`http://localhost:5001`**.
+3. No arquivo `.env`:
+
+   ```bash
+   AI_PROVIDER="local"
+   AI_BASE_URL="http://localhost:5001/v1"
+   AI_MODEL="koboldcpp"
+   AI_API_KEY=""
+   AI_TIMEOUT_MS="60000"
+   ```
+
+4. Reinicie o site (`npm run dev`) e confirme: `curl http://localhost:3000/api/ia/status`.
+
+**Modo nativo (alternativa):** o KoboldCpp também tem o endpoint próprio. Use:
 
 ```bash
+AI_PROVIDER="kobold"
+AI_BASE_URL="http://localhost:5001"
+```
+
+Se você iniciou o KoboldCpp com `--password`, coloque a senha em `AI_API_KEY` (o FeirAL envia
+`Authorization: Bearer <senha>`).
+
+> **Timeout:** no modo `kobold` o tempo de espera padrão é de **500s** — modelos grandes rodando
+> em hardware modesto (ex.: 4 GB de VRAM com offload para a RAM) podem demorar bastante para
+> gerar. Para ajustar, defina `AI_TIMEOUT_MS` no `.env` (em milissegundos).
+
+> **KoboldCpp em outra máquina/container:** aí a URL **não** é localhost e o modo `auto` não detecta
+> que é local — defina `AI_PROVIDER="local"` explicitamente e use o IP da máquina (ex.:
+> `http://192.168.0.10:5001/v1`). No KoboldCpp, habilite o host `0.0.0.0` (opção *Host* / `--host`)
+> para aceitar conexões externas.
+
+### Outros servidores locais
+
+```bash
+# Ollama
+ollama pull llama3.1
+AI_PROVIDER="local"
+AI_BASE_URL="http://localhost:11434/v1"
+AI_MODEL="llama3.1"
+
+# LM Studio (aba Local Server -> Start)
+AI_PROVIDER="local"
+AI_BASE_URL="http://localhost:1234/v1"
+AI_MODEL="nome-do-modelo-carregado"
+```
+
+### Nuvem (OpenAI ou compatível)
+
+```bash
+AI_PROVIDER="openai"
+AI_BASE_URL="https://api.openai.com/v1"
 AI_API_KEY="sua-chave"
-AI_BASE_URL="https://api.openai.com/v1"   # ou qualquer endpoint compatível
 AI_MODEL="gpt-4o-mini"
 ```
 
-Se a chamada falhar (rede, cota, modelo), a FeiraIA responde automaticamente com o assistente local.
-Nenhum outro recurso depende da IA, portanto o site funciona integralmente offline.
+### Diagnosticar
+
+`GET /api/ia/status` informa o provedor em uso, se exige chave e se o endpoint respondeu:
+
+```bash
+curl http://localhost:3000/api/ia/status
+# {"provider":"local","baseUrl":"http://localhost:5001/v1","model":"koboldcpp",
+#  "requiresKey":false,"hasKey":false,"reachable":true,"hints":["Endpoint acessivel..."]}
+```
+
+As respostas do chat trazem `engine`: `"llm"` (respondeu o modelo) ou `"local"` (assistente por
+regras). O widget mostra isso no cabeçalho ("Assistente de IA" ou "Assistente local (offline)").
 
 ---
 

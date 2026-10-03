@@ -14,7 +14,7 @@ export async function createAdAction(_prev: ActionState, formData: FormData): Pr
   try {
     user = await requireUser();
   } catch {
-    return { ok: false, message: "Entre para criar um anuncio." };
+    return { ok: false, message: "Entre para criar um anúncio." };
   }
 
   const parsed = adSchema.safeParse({
@@ -28,7 +28,7 @@ export async function createAdAction(_prev: ActionState, formData: FormData): Pr
   });
 
   if (!parsed.success) {
-    return { ok: false, message: "Confira os dados do anuncio.", errors: fieldErrors(parsed.error.issues) };
+    return { ok: false, message: "Confira os dados do anúncio.", errors: fieldErrors(parsed.error.issues) };
   }
 
   const data = parsed.data;
@@ -37,9 +37,9 @@ export async function createAdAction(_prev: ActionState, formData: FormData): Pr
     select: { organizerId: true, name: true },
   });
 
-  if (!fair) return { ok: false, message: "Feirinha nao encontrada." };
+  if (!fair) return { ok: false, message: "Feirinha não encontrada." };
   if (fair.organizerId !== user.id && user.role !== ROLES.ADMIN) {
-    return { ok: false, message: "Voce so pode anunciar suas proprias feirinhas." };
+    return { ok: false, message: "Você só pode anunciar suas próprias feirinhas." };
   }
 
   const tierInfo = AD_TIER_INFO[data.tier] ?? AD_TIER_INFO.BASIC;
@@ -65,7 +65,7 @@ export async function createAdAction(_prev: ActionState, formData: FormData): Pr
       createNotification({
         userId: admin.id,
         type: NOTIFICATION_TYPES.AD_UPDATE,
-        title: "Novo anuncio patrocinado aguardando aprovacao",
+        title: "Novo anúncio patrocinado aguardando aprovação",
         body: `${fair.name} - plano ${tierInfo.label}`,
         link: "/admin/anuncios",
       }),
@@ -83,7 +83,7 @@ export async function createAdAction(_prev: ActionState, formData: FormData): Pr
   revalidatePath("/organizador/anuncios");
   return {
     ok: true,
-    message: `Anuncio enviado! Plano ${tierInfo.label} (${tierInfo.impressionsPerDay.toLocaleString("pt-BR")} impressoes/dia).`,
+    message: `Anúncio enviado! Plano ${tierInfo.label} (${tierInfo.impressionsPerDay.toLocaleString("pt-BR")} impressões/dia).`,
   };
 }
 

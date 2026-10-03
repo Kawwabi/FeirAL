@@ -7,17 +7,20 @@ export function SiteFooter() {
       <div className="mx-auto grid max-w-7xl gap-8 px-4 py-12 sm:px-6 md:grid-cols-4">
         <div className="md:col-span-2">
           <div className="flex items-center gap-2 font-bold text-ink-900">
-            <span className="grid h-9 w-9 place-items-center rounded-xl bg-brand-600 text-white">
+            <span className="grid h-9 w-9 place-items-center rounded-xl bg-brand-500 text-white">
               <Ticket size={20} />
             </span>
-            Feir<span className="-ml-1.5 text-brand-600">AL</span>
+            Feir<span className="-ml-1.5 text-brand-500">AL</span>
           </div>
           <p className="mt-3 max-w-md text-sm text-ink-500">
-            Plataforma que reune, organiza e divulga as feirinhas de Alagoas. Descubra artesanato,
-            gastronomia, moda e cultura perto de voce.
+            Plataforma que reúne, organiza e divulga as feirinhas de Alagoas. Descubra artesanato,
+            gastronomia, moda e cultura perto de você.
           </p>
           <p className="mt-4 text-xs text-ink-400">
-            Projeto Integrador VI - Desenvolvimento de uma plataforma web de feirinhas.
+            Projeto Integrador VI - Desenvolvimento de uma plataforma web de feirinhas.{" "}
+            <span className="font-medium text-ink-600">
+              Desenvolvido por Vinícius Stanley &middot; CESMAC.
+            </span>
           </p>
         </div>
 

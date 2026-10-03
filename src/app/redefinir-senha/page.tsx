@@ -18,7 +18,7 @@ export default async function ResetPasswordPage({
   return (
     <div className="mx-auto flex max-w-md flex-col px-4 py-16 sm:px-6">
       <div className="mb-6 text-center">
-        <span className="mx-auto grid h-12 w-12 place-items-center rounded-2xl bg-brand-600 text-white">
+        <span className="mx-auto grid h-12 w-12 place-items-center rounded-2xl bg-brand-500 text-white">
           <KeyRound size={24} />
         </span>
         <h1 className="mt-4 text-2xl font-bold text-ink-900">Definir nova senha</h1>

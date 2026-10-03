@@ -12,7 +12,7 @@ export async function updateUserRoleAction(formData: FormData): Promise<void> {
   const role = String(formData.get("role") ?? "");
 
   if (!["VISITOR", "ORGANIZER", "ADMIN"].includes(role)) return;
-  if (userId === admin.id && role !== "ADMIN") return; // nao rebaixa a si mesmo
+  if (userId === admin.id && role !== "ADMIN") return; // não rebaixa a si mesmo
 
   await prisma.user.update({ where: { id: userId }, data: { role } });
   await logAudit({

@@ -6,7 +6,7 @@ const NAV = [
   { href: "/organizador", label: "Painel" },
   { href: "/organizador/feirinhas", label: "Minhas feirinhas" },
   { href: "/organizador/feirinhas/nova", label: "Nova feirinha" },
-  { href: "/organizador/anuncios", label: "Anuncios" },
+  { href: "/organizador/anuncios", label: "Anúncios" },
   { href: "/organizador/feedback", label: "Feedbacks" },
 ];
 

@@ -1,5 +1,5 @@
-// Integracao com Google Agenda via deep link + exportacao .ics (sem necessidade de OAuth).
-// Referencia: https://github.com/InteractionDesignFoundation/add-event-to-calendar-docs
+// Integração com Google Agenda via deep link + exportação .ics (sem necessidade de OAuth).
+// Referência: https://github.com/InteractionDesignFoundation/add-event-to-calendar-docs
 
 export interface CalendarEventInput {
   title: string;
@@ -41,7 +41,7 @@ function escapeIcs(text: string): string {
   return text.replace(/\\/g, "\\\\").replace(/;/g, "\\;").replace(/,/g, "\\,").replace(/\n/g, "\\n");
 }
 
-/** Gera o conteudo de um arquivo .ics (compativel com Google Agenda, Outlook, Apple). */
+/** Gera o conteúdo de um arquivo .ics (compatível com Google Agenda, Outlook, Apple). */
 export function buildIcs(events: CalendarEventInput[], calendarName = "FeirAL"): string {
   const lines: string[] = [
     "BEGIN:VCALENDAR",
@@ -72,7 +72,7 @@ export function buildIcs(events: CalendarEventInput[], calendarName = "FeirAL"):
   return lines.join("\r\n");
 }
 
-/** Agrupa eventos por dia (chave YYYY-MM-DD) preservando a ordem cronologica. */
+/** Agrupa eventos por dia (chave YYYY-MM-DD) preservando a ordem cronológica. */
 export function groupEventsByDay<T extends { startsAt: Date | string }>(
   events: T[],
 ): Array<{ day: string; label: string; events: T[] }> {

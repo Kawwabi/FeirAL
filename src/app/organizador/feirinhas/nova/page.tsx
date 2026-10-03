@@ -17,7 +17,7 @@ export default async function NewFairPage() {
       <PageHeader
         eyebrow="Organizador"
         title="Cadastrar nova feirinha"
-        description="Preencha os detalhes, o local e a agenda. Salve como rascunho ou envie para aprovacao."
+        description="Preencha os detalhes, o local e a agenda. Salve como rascunho ou envie para aprovação."
       />
       <FairForm
         action={createFairAction}

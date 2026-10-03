@@ -10,7 +10,7 @@ interface AuditInput {
   ip?: string | null;
 }
 
-/** Registra uma acao relevante para monitoramento no painel administrativo. */
+/** Registra uma ação relevante para monitoramento no painel administrativo. */
 export async function logAudit(input: AuditInput): Promise<void> {
   try {
     await prisma.auditLog.create({
@@ -24,6 +24,6 @@ export async function logAudit(input: AuditInput): Promise<void> {
       },
     });
   } catch {
-    // Auditoria nunca deve quebrar o fluxo principal da aplicacao.
+    // Auditoria nunca deve quebrar o fluxo principal da aplicação.
   }
 }

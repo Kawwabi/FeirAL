@@ -10,7 +10,7 @@ import { PageHeader } from "@/components/ui";
 
 export const metadata: Metadata = {
   title: "Mapa interativo das feirinhas",
-  description: "Veja no mapa todas as feirinhas de Alagoas e filtre por localizacao, data e categoria.",
+  description: "Veja no mapa todas as feirinhas de Alagoas e filtre por localização, data e categoria.",
 };
 
 export default async function MapaPage({ searchParams }: { searchParams: Promise<RawSearchParams> }) {
@@ -37,7 +37,7 @@ export default async function MapaPage({ searchParams }: { searchParams: Promise
     }),
   );
 
-  const colorBySlug = new Map(categories.map((c) => [c.slug, c.color ?? "#ea580c"]));
+  const colorBySlug = new Map(categories.map((c) => [c.slug, c.color ?? "#FF7001"]));
 
   const points: MapPoint[] = filtered
     .filter((f) => f.latitude != null && f.longitude != null)
@@ -48,7 +48,7 @@ export default async function MapaPage({ searchParams }: { searchParams: Promise
       city: f.city,
       latitude: f.latitude as number,
       longitude: f.longitude as number,
-      color: f.categorySlugs.length ? colorBySlug.get(f.categorySlugs[0]) : "#ea580c",
+      color: f.categorySlugs.length ? colorBySlug.get(f.categorySlugs[0]) : "#FF7001",
       rating: f.ratingCount > 0 ? f.ratingAverage : undefined,
     }));
 
@@ -86,7 +86,7 @@ export default async function MapaPage({ searchParams }: { searchParams: Promise
         </p>
         {withoutCoords > 0 ? (
           <p className="text-xs text-amber-700">
-            {withoutCoords} feirinha(s) sem coordenadas cadastradas nao aparecem no mapa.
+            {withoutCoords} feirinha(s) sem coordenadas cadastradas não aparecem no mapa.
           </p>
         ) : null}
       </div>
@@ -100,7 +100,7 @@ export default async function MapaPage({ searchParams }: { searchParams: Promise
             <Link
               key={fair.id}
               href={`/feirinhas/${fair.slug}`}
-              className="rounded-full border border-ink-200 bg-white px-3 py-1.5 text-sm text-ink-700 hover:border-brand-300 hover:text-brand-700"
+              className="rounded-full border border-ink-200 bg-white px-3 py-1.5 text-sm text-ink-700 hover:border-brand-300 hover:text-brand-600"
             >
               {fair.name} - {fair.city}
             </Link>

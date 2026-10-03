@@ -17,18 +17,18 @@ export interface AdItem {
   owner: { name: string };
 }
 
-/** Lista administrativa de todos os anuncios com acoes de pausar/reativar. */
+/** Lista administrativa de todos os anúncios com ações de pausar/reativar. */
 export function AllAdsSection({ ads }: { ads: AdItem[] }) {
   return (
     <section>
-      <h2 className="mb-3 text-base font-semibold text-ink-900">Todos os anuncios</h2>
+      <h2 className="mb-3 text-base font-semibold text-ink-900">Todos os anúncios</h2>
       <Card className="overflow-hidden">
         <div className="divide-y divide-ink-100">
           {ads.map((ad) => (
             <div key={ad.id} className="flex flex-wrap items-center justify-between gap-3 p-4">
               <div className="min-w-0">
                 <div className="flex flex-wrap items-center gap-2">
-                  <Link href={`/feirinhas/${ad.fair.slug}`} className="font-medium text-ink-900 hover:text-brand-700">
+                  <Link href={`/feirinhas/${ad.fair.slug}`} className="font-medium text-ink-900 hover:text-brand-600">
                     {ad.title}
                   </Link>
                   <AdStatusBadge status={ad.status} />

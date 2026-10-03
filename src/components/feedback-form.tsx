@@ -6,7 +6,7 @@ import { submitFeedbackAction } from "@/app/actions/community";
 import { initialActionState } from "@/lib/action-state";
 import { fieldClass } from "@/components/ui";
 
-/** Area de feedback dos organizadores sobre a participacao em uma feirinha. */
+/** Área de feedback dos organizadores sobre a participação em uma feirinha. */
 export function OrganizerFeedbackForm({
   fairId,
   fairName,
@@ -21,8 +21,8 @@ export function OrganizerFeedbackForm({
   if (!canSubmit) {
     return (
       <p className="rounded-lg border border-dashed border-ink-300 bg-ink-50 px-4 py-3 text-sm text-ink-500">
-        A area de feedback e destinada a organizadores. Crie uma conta de organizador para compartilhar
-        sua experiencia nesta feirinha.
+        A área de feedback é destinada a organizadores. Crie uma conta de organizador para compartilhar
+        sua experiência nesta feirinha.
       </p>
     );
   }
@@ -33,13 +33,13 @@ export function OrganizerFeedbackForm({
 
       <label className="block">
         <span className="mb-1 block text-sm font-medium text-ink-700">
-          Como foi sua experiencia em {fairName}? <span className="text-brand-600">*</span>
+          Como foi sua experiência em {fairName}? <span className="text-brand-500">*</span>
         </span>
         <textarea
           name="experience"
           required
           rows={3}
-          placeholder="Conte sobre fluxo de visitantes, estrutura, apoio da organizacao..."
+          placeholder="Conte sobre fluxo de visitantes, estrutura, apoio da organização..."
           className={fieldClass}
         />
         {state.errors?.experience ? (
@@ -48,7 +48,7 @@ export function OrganizerFeedbackForm({
       </label>
 
       <label className="block">
-        <span className="mb-1 block text-sm font-medium text-ink-700">Sugestoes de melhoria</span>
+        <span className="mb-1 block text-sm font-medium text-ink-700">Sugestões de melhoria</span>
         <textarea
           name="suggestions"
           rows={2}
@@ -59,7 +59,7 @@ export function OrganizerFeedbackForm({
 
       <div className="grid gap-3 sm:grid-cols-2">
         <label className="block">
-          <span className="mb-1 block text-sm font-medium text-ink-700">Nota de organizacao (1-5)</span>
+          <span className="mb-1 block text-sm font-medium text-ink-700">Nota de organização (1-5)</span>
           <select name="organizationScore" defaultValue="5" className={fieldClass}>
             {[5, 4, 3, 2, 1].map((n) => (
               <option key={n} value={n}>

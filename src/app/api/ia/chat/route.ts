@@ -3,7 +3,7 @@ import { cookies } from "next/headers";
 import { randomUUID } from "node:crypto";
 import { prisma } from "@/lib/prisma";
 import { getCurrentUser } from "@/lib/auth";
-import { buildAiContext, generateAssistantReply, type ChatTurn } from "@/lib/ai";
+import { buildAiContext, generateAssistantReplyDetailed, type ChatTurn } from "@/lib/ai";
 
 const COOKIE = "feiral_chat";
 
@@ -12,7 +12,7 @@ export async function POST(request: Request) {
   try {
     body = await request.json();
   } catch {
-    return NextResponse.json({ error: "Requisicao invalida." }, { status: 400 });
+    return NextResponse.json({ error: "Requisição inválida." }, { status: 400 });
   }
 
   const message = (body.message ?? "").trim();
@@ -25,7 +25,8 @@ export async function POST(request: Request) {
 
   const ctx = await buildAiContext();
   const turns: ChatTurn[] = [...history, { role: "user", content: message }];
-  const reply = await generateAssistantReply(turns, ctx);
+  const result = await generateAssistantReplyDetailed(turns, ctx);
+  const reply = result.text;
 
   // Persiste a conversa para monitoramento (best-effort).
   try {
@@ -48,7 +49,12 @@ export async function POST(request: Request) {
       ],
     });
 
-    const response = NextResponse.json({ reply, context: { totalFairs: ctx.totalFairs } });
+    const response = NextResponse.json({
+      reply,
+      engine: result.engine,
+      provider: result.provider,
+      context: { totalFairs: ctx.totalFairs },
+    });
     response.cookies.set(COOKIE, sessionKey, {
       httpOnly: true,
       sameSite: "lax",
@@ -57,6 +63,6 @@ export async function POST(request: Request) {
     });
     return response;
   } catch {
-    return NextResponse.json({ reply });
+    return NextResponse.json({ reply, engine: result.engine, provider: result.provider });
   }
 }

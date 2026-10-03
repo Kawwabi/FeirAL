@@ -36,7 +36,7 @@ export async function registerAction(_prev: ActionState, formData: FormData): Pr
 
   const existing = await prisma.user.findUnique({ where: { email: normalizedEmail } });
   if (existing) {
-    return { ok: false, errors: { email: "Este e-mail ja esta cadastrado." } };
+    return { ok: false, errors: { email: "Este e-mail já está cadastrado." } };
   }
 
   const user = await prisma.user.create({
@@ -94,11 +94,11 @@ export async function requestPasswordResetAction(
   const email = parsed.data.email.toLowerCase().trim();
   const user = await prisma.user.findUnique({ where: { email } });
 
-  // Resposta generica para nao revelar se o e-mail existe.
+  // Resposta genérica para não revelar se o e-mail existe.
   if (!user) {
     return {
       ok: true,
-      message: "Se o e-mail estiver cadastrado, enviaremos as instrucoes de recuperacao.",
+      message: "Se o e-mail estiver cadastrado, enviaremos as instruções de recuperação.",
     };
   }
 
@@ -107,10 +107,10 @@ export async function requestPasswordResetAction(
     data: { userId: user.id, token, expiresAt: new Date(Date.now() + 1000 * 60 * 60) },
   });
 
-  // Ambiente de demonstracao: nao ha servico de e-mail, entao exibimos o link na tela.
+  // Ambiente de demonstração: não há serviço de e-mail, então exibimos o link na tela.
   return {
     ok: true,
-    message: `Link de recuperacao gerado: /redefinir-senha?token=${token} (valido por 1 hora).`,
+    message: `Link de recuperação gerado: /redefinir-senha?token=${token} (valido por 1 hora).`,
   };
 }
 
@@ -129,7 +129,7 @@ export async function resetPasswordAction(
 
   const record = await prisma.passwordResetToken.findUnique({ where: { token: parsed.data.token } });
   if (!record || record.usedAt || record.expiresAt.getTime() < Date.now()) {
-    return { ok: false, message: "Token invalido ou expirado." };
+    return { ok: false, message: "Token inválido ou expirado." };
   }
 
   await prisma.$transaction([

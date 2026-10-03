@@ -81,7 +81,7 @@ export async function listCategories() {
   return prisma.category.findMany({ orderBy: { name: "asc" } });
 }
 
-/** Feirinhas por categoria (slug) para paginas de categoria. */
+/** Feirinhas por categoria (slug) para páginas de categoria. */
 export async function listFairsByCategory(slug: string): Promise<FairListItem[]> {
   const all = await listPublishedFairs();
   return all.filter((f) => f.categorySlugs.includes(slug));
@@ -201,7 +201,7 @@ export async function isFollowing(userId: string, fairId: string): Promise<boole
   return Boolean(row);
 }
 
-/** Anuncios ativos priorizados por nivel (PREMIUM > STANDARD > BASIC). */
+/** Anúncios ativos priorizados por nível (PREMIUM > STANDARD > BASIC). */
 export async function listActiveAds(limit = 6) {
   const order = ["PREMIUM", "STANDARD", "BASIC"];
   const ads = await prisma.advertisement.findMany({

@@ -57,7 +57,7 @@ export function FairBody({ fair, user, summary, percentages, myReview, comments,
 
         {fair.latitude != null && fair.longitude != null ? (
           <section>
-            <SectionTitle title="Localizacao" />
+            <SectionTitle title="Localização" />
             <FairMap
               points={[
                 {
@@ -103,7 +103,7 @@ export function FairBody({ fair, user, summary, percentages, myReview, comments,
         <Card className="p-5">
           <h3 className="text-sm font-semibold text-ink-800">Organizador</h3>
           <div className="mt-3 flex items-center gap-3">
-            <span className="grid h-10 w-10 place-items-center rounded-full bg-brand-600 text-sm font-bold text-white">
+            <span className="grid h-10 w-10 place-items-center rounded-full bg-brand-500 text-sm font-bold text-white">
               {initials(fair.organizer.name)}
             </span>
             <div>
@@ -128,7 +128,7 @@ export function FairBody({ fair, user, summary, percentages, myReview, comments,
         <Card className="p-5">
           <h3 className="text-sm font-semibold text-ink-800">Algo errado?</h3>
           <p className="mt-1 text-xs text-ink-500">
-            Ajude a manter a plataforma confiavel denunciando informacoes incorretas.
+            Ajude a manter a plataforma confiavel denunciando informações incorretas.
           </p>
           <ReportForm targetType="FAIR" targetId={fair.id} currentUserId={user?.id ?? null} />
         </Card>
@@ -141,14 +141,14 @@ export function OfferingsSection({ offerings }: { offerings: FairDetail["offerin
   if (offerings.length === 0) return null;
   return (
     <section>
-      <SectionTitle title="Produtos e servicos" subtitle="O que voce encontra na feirinha" />
+      <SectionTitle title="Produtos e serviços" subtitle="O que você encontra na feirinha" />
       <div className="grid gap-3 sm:grid-cols-2">
         {offerings.map((offering) => (
           <Card key={offering.id} className="p-4">
             <div className="flex items-start justify-between gap-2">
               <h3 className="font-semibold text-ink-900">{offering.name}</h3>
               <Badge tone={offering.kind === "SERVICE" ? "info" : "brand"}>
-                <Tag size={11} /> {offering.kind === "SERVICE" ? "Servico" : "Produto"}
+                <Tag size={11} /> {offering.kind === "SERVICE" ? "Serviço" : "Produto"}
               </Badge>
             </div>
             {offering.description ? <p className="mt-1 text-sm text-ink-500">{offering.description}</p> : null}
@@ -233,15 +233,15 @@ export function ReviewsSection({
   canModerate: boolean;
 }) {
   return (
-    <section id="avaliacoes" className="scroll-mt-20">
-      <SectionTitle title="Avaliacoes" subtitle="O que as pessoas acharam da feirinha" />
+    <section id="avaliações" className="scroll-mt-20">
+      <SectionTitle title="Avaliações" subtitle="O que as pessoas acharam da feirinha" />
 
       <div className="grid gap-6 lg:grid-cols-5">
         <Card className="p-5 lg:col-span-2">
           <div className="text-center">
             <p className="text-4xl font-bold text-ink-900">{summary.average.toFixed(1)}</p>
             <Stars value={summary.average} size={18} className="mt-1 justify-center" />
-            <p className="mt-1 text-xs text-ink-500">{summary.count} avaliacoes</p>
+            <p className="mt-1 text-xs text-ink-500">{summary.count} avaliações</p>
           </div>
           <div className="mt-4 space-y-1.5">
             {[5, 4, 3, 2, 1].map((star) => (
@@ -260,13 +260,13 @@ export function ReviewsSection({
           {currentUserId ? (
             <Card className="p-5">
               <h3 className="mb-3 text-sm font-semibold text-ink-800">
-                {myReview ? "Sua avaliacao" : "Avalie esta feirinha"}
+                {myReview ? "Sua avaliação" : "Avalie esta feirinha"}
               </h3>
               <ReviewForm fairId={fairId} existing={myReview} />
             </Card>
           ) : (
             <Card className="p-5 text-sm text-ink-500">
-              <Link href="/entrar" className="font-medium text-brand-700 hover:underline">
+              <Link href="/entrar" className="font-medium text-brand-600 hover:underline">
                 Entre
               </Link>{" "}
               para avaliar esta feirinha.
@@ -277,7 +277,7 @@ export function ReviewsSection({
 
       <div className="mt-5 space-y-4">
         {reviews.length === 0 ? (
-          <Card className="p-6 text-sm text-ink-500">Ainda nao ha avaliacoes. Seja o primeiro!</Card>
+          <Card className="p-6 text-sm text-ink-500">Ainda não há avaliações. Seja o primeiro!</Card>
         ) : (
           reviews.map((review) => (
             <Card key={review.id} className="p-5">
@@ -331,21 +331,21 @@ export function FeedbackSection({
     <section>
       <SectionTitle
         title="Feedback dos organizadores"
-        subtitle="Experiencias de quem ja participou desta feirinha"
+        subtitle="Experiências de quem já participou desta feirinha"
       />
 
       {feedbacks.length > 0 ? (
         <div className="mb-4 grid gap-3 sm:grid-cols-3">
           <Card className="p-4 text-center">
             <p className="text-2xl font-bold text-leaf-700">{avgOrganization.toFixed(1)}</p>
-            <p className="text-xs text-ink-500">nota media de organizacao</p>
+            <p className="text-xs text-ink-500">nota média de organização</p>
           </Card>
           <Card className="p-4 text-center">
             <p className="text-2xl font-bold text-ink-900">{feedbacks.length}</p>
             <p className="text-xs text-ink-500">feedbacks recebidos</p>
           </Card>
           <Card className="p-4 text-center">
-            <p className="text-2xl font-bold text-brand-600">{wouldReturn}</p>
+            <p className="text-2xl font-bold text-brand-500">{wouldReturn}</p>
             <p className="text-xs text-ink-500">participariam novamente</p>
           </Card>
         </div>
@@ -362,7 +362,7 @@ export function FeedbackSection({
         <div className="space-y-3">
           {feedbacks.length === 0 ? (
             <Card className="p-6 text-sm text-ink-500">
-              Ainda nao ha feedbacks de organizadores para esta feirinha.
+              Ainda não há feedbacks de organizadores para esta feirinha.
             </Card>
           ) : (
             feedbacks.map((feedback) => (
@@ -380,17 +380,17 @@ export function FeedbackSection({
                             <Check size={11} /> Participaria novamente
                           </>
                         ) : (
-                          "Nao participaria novamente"
+                          "Não participaria novamente"
                         )}
                       </Badge>
                       <span className="text-xs text-ink-400">
-                        organizacao {feedback.organizationScore}/5 - {formatDate(feedback.createdAt)}
+                        organização {feedback.organizationScore}/5 - {formatDate(feedback.createdAt)}
                       </span>
                     </div>
                     <p className="mt-1 whitespace-pre-line text-sm text-ink-600">{feedback.experience}</p>
                     {feedback.suggestions ? (
                       <p className="mt-2 rounded-lg bg-ink-50 p-2 text-xs text-ink-600">
-                        <strong>Sugestoes:</strong> {feedback.suggestions}
+                        <strong>Sugestões:</strong> {feedback.suggestions}
                       </p>
                     ) : null}
                     <ReportForm targetType="FEEDBACK" targetId={feedback.id} currentUserId={user?.id ?? null} />
@@ -414,10 +414,10 @@ export function ContactCard({ fair }: { fair: FairDetail }) {
 
   return (
     <Card className="p-5">
-      <h3 className="text-sm font-semibold text-ink-800">Informacoes de contato</h3>
+      <h3 className="text-sm font-semibold text-ink-800">Informações de contato</h3>
       <div className="mt-3 space-y-3 text-sm">
         <p className="flex items-start gap-2 text-ink-600">
-          <MapPin size={15} className="mt-0.5 shrink-0 text-brand-600" />
+          <MapPin size={15} className="mt-0.5 shrink-0 text-brand-500" />
           <span>
             {fair.address}
             <br />
@@ -427,9 +427,9 @@ export function ContactCard({ fair }: { fair: FairDetail }) {
         </p>
         {items.map((item, index) => (
           <p key={index} className="flex items-center gap-2 text-ink-600">
-            <span className="text-brand-600">{item.icon}</span>
+            <span className="text-brand-500">{item.icon}</span>
             {item.href ? (
-              <a href={item.href} target="_blank" rel="noopener noreferrer" className="hover:text-brand-700 hover:underline">
+              <a href={item.href} target="_blank" rel="noopener noreferrer" className="hover:text-brand-600 hover:underline">
                 {item.value}
               </a>
             ) : (
@@ -438,7 +438,7 @@ export function ContactCard({ fair }: { fair: FairDetail }) {
           </p>
         ))}
         {items.length === 0 ? (
-          <p className="text-xs text-ink-400">O organizador nao informou canais de contato.</p>
+          <p className="text-xs text-ink-400">O organizador não informou canais de contato.</p>
         ) : null}
       </div>
     </Card>

@@ -47,7 +47,7 @@ const EMPTY: FairFormValues = {
   shortDescription: "",
   description: "",
   address: "",
-  city: "Maceio",
+  city: "Maceió",
   state: "AL",
   zipCode: "",
   latitude: "",
@@ -102,8 +102,8 @@ export function FairForm({
       ) : null}
 
       <fieldset className="card-surface space-y-4 p-5">
-        <legend className="px-1 text-sm font-semibold uppercase tracking-wide text-brand-600">
-          Informacoes principais
+        <legend className="px-1 text-sm font-semibold uppercase tracking-wide text-brand-500">
+          Informações principais
         </legend>
 
         <Field label="Nome da feirinha" required error={state.errors?.name}>
@@ -112,22 +112,22 @@ export function FairForm({
             defaultValue={value.name}
             required
             className={fieldClass}
-            placeholder="Ex.: Feira de Artesanato da Pajucara"
+            placeholder="Ex.: Feira de Artesanato da Pajuçara"
           />
         </Field>
 
-        <Field label="Resumo curto" hint="Aparece nos cards de listagem (ate 180 caracteres).">
+        <Field label="Resumo curto" hint="Aparece nos cards de listagem (até 180 caracteres).">
           <input name="shortDescription" defaultValue={value.shortDescription} className={fieldClass} maxLength={180} />
         </Field>
 
-        <Field label="Descricao completa" required error={state.errors?.description}>
+        <Field label="Descrição completa" required error={state.errors?.description}>
           <textarea
             name="description"
             defaultValue={value.description}
             required
             rows={5}
             className={`${fieldClass} min-h-0`}
-            placeholder="Descreva a feirinha, sua historia, publico e diferenciais."
+            placeholder="Descreva a feirinha, sua história, público e diferenciais."
           />
         </Field>
 
@@ -140,7 +140,7 @@ export function FairForm({
                 onClick={() => toggleCategory(cat.slug)}
                 className={
                   selectedCats.includes(cat.slug)
-                    ? "inline-flex items-center gap-1.5 rounded-full border border-brand-400 bg-brand-50 px-3 py-1.5 text-xs font-medium text-brand-700"
+                    ? "inline-flex items-center gap-1.5 rounded-full border border-brand-400 bg-brand-50 px-3 py-1.5 text-xs font-medium text-brand-600"
                     : "inline-flex items-center gap-1.5 rounded-full border border-ink-200 bg-white px-3 py-1.5 text-xs font-medium text-ink-600 hover:bg-ink-50"
                 }
               >
@@ -167,10 +167,10 @@ function LocationFields({ value, errors }: { value: FairFormValues; errors?: Rec
 
   return (
     <fieldset className="card-surface space-y-4 p-5">
-      <legend className="px-1 text-sm font-semibold uppercase tracking-wide text-brand-600">Localizacao</legend>
+      <legend className="px-1 text-sm font-semibold uppercase tracking-wide text-brand-500">Localização</legend>
 
-      <Field label="Endereco" required error={errors?.address}>
-        <input name="address" defaultValue={value.address} required className={fieldClass} placeholder="Rua, numero, bairro" />
+      <Field label="Endereço" required error={errors?.address}>
+        <input name="address" defaultValue={value.address} required className={fieldClass} placeholder="Rua, número, bairro" />
       </Field>
 
       <div className="grid gap-4 sm:grid-cols-3">
@@ -200,7 +200,7 @@ function LocationFields({ value, errors }: { value: FairFormValues; errors?: Rec
       </div>
 
       <p className="inline-flex items-center gap-1.5 text-xs text-ink-500">
-        <MapPin size={13} /> Dica: copie as coordenadas do Google Maps (botao direito no local).
+        <MapPin size={13} /> Dica: copie as coordenadas do Google Maps (botão direito no local).
       </p>
     </fieldset>
   );
@@ -209,7 +209,7 @@ function LocationFields({ value, errors }: { value: FairFormValues; errors?: Rec
 function ContactFields({ value, errors }: { value: FairFormValues; errors?: Record<string, string> }) {
   return (
     <fieldset className="card-surface space-y-4 p-5">
-      <legend className="px-1 text-sm font-semibold uppercase tracking-wide text-brand-600">
+      <legend className="px-1 text-sm font-semibold uppercase tracking-wide text-brand-500">
         Contato e redes
       </legend>
       <div className="grid gap-4 sm:grid-cols-2">
@@ -246,8 +246,8 @@ function OfferingsEditor({
 
   return (
     <fieldset className="card-surface space-y-4 p-5">
-      <legend className="px-1 text-sm font-semibold uppercase tracking-wide text-brand-600">
-        Produtos e servicos oferecidos
+      <legend className="px-1 text-sm font-semibold uppercase tracking-wide text-brand-500">
+        Produtos e serviços oferecidos
       </legend>
 
       {offerings.length === 0 ? (
@@ -259,7 +259,7 @@ function OfferingsEditor({
               <input
                 value={offering.name}
                 onChange={(e) => update(index, { name: e.target.value })}
-                placeholder="Nome do produto/servico"
+                placeholder="Nome do produto/serviço"
                 className={`${fieldClass} sm:col-span-4`}
               />
               <select
@@ -276,13 +276,13 @@ function OfferingsEditor({
               <input
                 value={offering.priceRange}
                 onChange={(e) => update(index, { priceRange: e.target.value })}
-                placeholder="Faixa de preco"
+                placeholder="Faixa de preço"
                 className={`${fieldClass} sm:col-span-2`}
               />
               <input
                 value={offering.description}
                 onChange={(e) => update(index, { description: e.target.value })}
-                placeholder="Descricao breve"
+                placeholder="Descrição breve"
                 className={`${fieldClass} sm:col-span-3`}
               />
               <button
@@ -324,11 +324,11 @@ function EventsEditor({
 
   return (
     <fieldset className="card-surface space-y-4 p-5">
-      <legend className="px-1 text-sm font-semibold uppercase tracking-wide text-brand-600">
+      <legend className="px-1 text-sm font-semibold uppercase tracking-wide text-brand-500">
         Agenda de eventos
       </legend>
       <p className="-mt-2 text-xs text-ink-500">
-        Cadastre as datas em que a feirinha acontece. Os eventos aparecem na agenda publica e podem ser
+        Cadastre as datas em que a feirinha acontece. Os eventos aparecem na agenda pública e podem ser
         adicionados ao Google Agenda.
       </p>
 
@@ -341,11 +341,11 @@ function EventsEditor({
               <input
                 value={event.title}
                 onChange={(e) => update(index, { title: e.target.value })}
-                placeholder="Titulo do evento (ex.: Feirinha de sabado)"
+                placeholder="Título do evento (ex.: Feirinha de sábado)"
                 className={`${fieldClass} sm:col-span-12`}
               />
               <label className="sm:col-span-3">
-                <span className="mb-1 block text-[11px] font-medium text-ink-500">Inicio</span>
+                <span className="mb-1 block text-[11px] font-medium text-ink-500">Início</span>
                 <input
                   type="datetime-local"
                   value={event.startsAt}
@@ -354,7 +354,7 @@ function EventsEditor({
                 />
               </label>
               <label className="sm:col-span-3">
-                <span className="mb-1 block text-[11px] font-medium text-ink-500">Termino</span>
+                <span className="mb-1 block text-[11px] font-medium text-ink-500">Término</span>
                 <input
                   type="datetime-local"
                   value={event.endsAt}
@@ -411,10 +411,10 @@ function SubmitRow({ pending, ok, message }: { pending: boolean; ok: boolean; me
           name="intent"
           value="submit"
           disabled={pending}
-          className="inline-flex items-center gap-2 rounded-lg bg-brand-600 px-5 py-2 text-sm font-medium text-white hover:bg-brand-700 disabled:opacity-60"
+          className="inline-flex items-center gap-2 rounded-lg bg-brand-500 px-5 py-2 text-sm font-medium text-white hover:bg-brand-600 disabled:opacity-60"
         >
           {pending ? <Loader2 size={15} className="animate-spin" /> : <Send size={15} />}
-          Enviar para aprovacao
+          Enviar para aprovação
         </button>
       </div>
       {ok && message ? (

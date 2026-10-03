@@ -1,4 +1,4 @@
-// Logica pura de agregacao de avaliacoes - coberta por testes em tests/ratings.test.ts
+// Lógica pura de agregação de avaliações - coberta por testes em tests/ratings.test.ts
 
 export interface RatingLike {
   rating: number;
@@ -20,8 +20,8 @@ const EMPTY_DISTRIBUTION: Record<1 | 2 | 3 | 4 | 5, number> = {
 };
 
 /**
- * Calcula a media, a contagem e a distribuicao de notas.
- * Apenas avaliacoes com status PUBLISHED (ou sem status informado) sao consideradas.
+ * Calcula a média, a contagem e a distribuição de notas.
+ * Apenas avaliações com status PUBLISHED (ou sem status informado) são consideradas.
  */
 export function summarizeRatings(reviews: RatingLike[]): RatingSummary {
   const visible = reviews.filter((r) => !r.status || r.status === "PUBLISHED");
@@ -43,7 +43,7 @@ export function summarizeRatings(reviews: RatingLike[]): RatingSummary {
   return { average, count, distribution };
 }
 
-/** Percentual (0-100) de cada nota em relacao ao total de avaliacoes visiveis. */
+/** Percentual (0-100) de cada nota em relação ao total de avaliações visíveis. */
 export function distributionPercentages(
   distribution: Record<1 | 2 | 3 | 4 | 5, number>,
 ): Record<1 | 2 | 3 | 4 | 5, number> {
@@ -56,7 +56,7 @@ export function distributionPercentages(
   return result;
 }
 
-/** Media de uma lista simples de numeros, arredondada para 1 casa decimal. */
+/** Média de uma lista simples de números, arredondada para 1 casa decimal. */
 export function averageOf(values: number[]): number {
   if (values.length === 0) return 0;
   const sum = values.reduce((acc, n) => acc + n, 0);

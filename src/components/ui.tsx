@@ -1,13 +1,13 @@
 import type { ReactNode } from "react";
 import { cn } from "@/lib/utils";
 
-/* ---------------------- Botoes ---------------------- */
+/* ---------------------- Botões ---------------------- */
 
 type ButtonVariant = "primary" | "secondary" | "outline" | "ghost" | "danger" | "success";
 type ButtonSize = "sm" | "md" | "lg";
 
 const VARIANTS: Record<ButtonVariant, string> = {
-  primary: "bg-brand-600 text-white hover:bg-brand-700 border border-transparent",
+  primary: "bg-brand-500 text-white hover:bg-brand-600 border border-transparent",
   secondary: "bg-ink-900 text-white hover:bg-ink-800 border border-transparent",
   outline: "bg-white text-ink-700 hover:bg-ink-50 border border-ink-300",
   ghost: "bg-transparent text-ink-600 hover:bg-ink-100 border border-transparent",
@@ -27,7 +27,7 @@ export function buttonClass(
   extra?: string,
 ): string {
   return cn(
-    "inline-flex items-center justify-center gap-2 rounded-lg font-medium transition-colors duration-150",
+    "inline-flex items-center justify-center gap-2 rounded-lg font-medium transition-all duration-150 active:scale-[0.98]",
     "disabled:cursor-not-allowed disabled:opacity-60 focus-ring",
     VARIANTS[variant],
     SIZES[size],
@@ -52,7 +52,7 @@ export function Button({
   );
 }
 
-/* ---------------------- Cards e secoes ---------------------- */
+/* ---------------------- Cards e seções ---------------------- */
 
 export function Card({ className, children }: { className?: string; children: ReactNode }) {
   return <div className={cn("card-surface", className)}>{children}</div>;
@@ -95,7 +95,7 @@ export function PageHeader({
     <div className="mb-8 flex flex-wrap items-end justify-between gap-4">
       <div>
         {eyebrow ? (
-          <p className="text-xs font-semibold uppercase tracking-wider text-brand-600">{eyebrow}</p>
+          <p className="text-xs font-semibold uppercase tracking-wider text-brand-500">{eyebrow}</p>
         ) : null}
         <h1 className="mt-1 text-3xl font-bold tracking-tight text-ink-900 sm:text-4xl">{title}</h1>
         {description ? <p className="mt-2 max-w-2xl text-ink-600">{description}</p> : null}
@@ -140,7 +140,7 @@ export function Badge({
   );
 }
 
-/* ---------------------- Formularios ---------------------- */
+/* ---------------------- Formulários ---------------------- */
 
 export const fieldClass =
   "w-full rounded-lg border border-ink-300 bg-white px-3 py-2 text-sm text-ink-800 placeholder:text-ink-400 focus-ring";
@@ -163,7 +163,7 @@ export function Field({
   return (
     <label className={cn("block", className)}>
       <span className="mb-1 block text-sm font-medium text-ink-700">
-        {label} {required ? <span className="text-brand-600">*</span> : null}
+        {label} {required ? <span className="text-brand-500">*</span> : null}
       </span>
       {children}
       {hint && !error ? <span className="mt-1 block text-xs text-ink-500">{hint}</span> : null}

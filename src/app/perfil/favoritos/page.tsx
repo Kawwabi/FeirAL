@@ -18,13 +18,13 @@ export default async function FavoritesPage() {
       <PageHeader
         eyebrow="Minha conta"
         title="Feirinhas que acompanho"
-        description="Voce recebe notificacoes quando novas datas forem anunciadas."
+        description="Você recebe notificações quando novas datas forem anunciadas."
       />
 
       {follows.length === 0 ? (
         <EmptyState
           icon={<Heart size={28} />}
-          title="Voce ainda nao acompanha nenhuma feirinha"
+          title="Você ainda não acompanha nenhuma feirinha"
           description="Explore as feirinhas e clique em 'Acompanhar' para receber novidades."
           action={
             <Link href="/feirinhas" className={buttonClass("primary")}>
@@ -50,7 +50,7 @@ export default async function FavoritesPage() {
               <div className="min-w-0 flex-1">
                 <Link
                   href={`/feirinhas/${follow.fair.slug}`}
-                  className="font-semibold text-ink-900 hover:text-brand-700"
+                  className="font-semibold text-ink-900 hover:text-brand-600"
                 >
                   {follow.fair.name}
                 </Link>

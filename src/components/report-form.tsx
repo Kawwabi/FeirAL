@@ -7,7 +7,7 @@ import { initialActionState } from "@/lib/action-state";
 import { REPORT_REASONS } from "@/lib/constants";
 import { fieldClass } from "@/components/ui";
 
-/** Formulario de denuncia reutilizavel (feirinha, avaliacao, comentario, feedback). */
+/** Formulário de denúncia reutilizavel (feirinha, avaliação, comentário, feedback). */
 export function ReportForm({
   targetType,
   targetId,
@@ -52,7 +52,7 @@ export function ReportForm({
           className="inline-flex items-center gap-2 rounded-lg bg-red-600 px-3 py-1.5 text-xs font-medium text-white hover:bg-red-700 disabled:opacity-60"
         >
           {pending ? <Loader2 size={13} className="animate-spin" /> : <Flag size={13} />}
-          Enviar denuncia
+          Enviar denúncia
         </button>
       </form>
     </details>

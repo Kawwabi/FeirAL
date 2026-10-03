@@ -4,7 +4,7 @@ import { requireUser } from "@/lib/auth";
 import { PreferencesForm } from "@/components/forms";
 import { Card, PageHeader } from "@/components/ui";
 
-export const metadata: Metadata = { title: "Preferencias de notificacao" };
+export const metadata: Metadata = { title: "Preferências de notificação" };
 
 export default async function PreferencesPage() {
   const user = await requireUser();
@@ -17,8 +17,8 @@ export default async function PreferencesPage() {
     <div className="space-y-6">
       <PageHeader
         eyebrow="Minha conta"
-        title="Preferencias de notificacao"
-        description="Escolha como e quando voce quer ser avisado sobre as feirinhas."
+        title="Preferências de notificação"
+        description="Escolha como e quando você quer ser avisado sobre as feirinhas."
       />
 
       <Card className="p-6">

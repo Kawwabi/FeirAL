@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 
-/** Contabiliza um clique em anuncio patrocinado e redireciona para a feirinha. */
+/** Contabiliza um clique em anúncio patrocinado e redireciona para a feirinha. */
 export async function GET(
   _request: Request,
   { params }: { params: Promise<{ id: string }> },

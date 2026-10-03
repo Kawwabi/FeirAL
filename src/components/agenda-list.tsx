@@ -5,7 +5,7 @@ import { GoogleCalendarButton } from "@/components/calendar-buttons";
 import { Card } from "@/components/ui";
 import { formatTime } from "@/lib/utils";
 
-/** Lista de eventos agrupados por dia (usada na pagina de agenda). */
+/** Lista de eventos agrupados por dia (usada na página de agenda). */
 export function AgendaList({
   grouped,
 }: {
@@ -16,7 +16,7 @@ export function AgendaList({
       {grouped.map((group) => (
         <section key={group.day}>
           <h2 className="mb-3 inline-flex items-center gap-2 text-lg font-semibold text-ink-900">
-            <Calendar size={18} className="text-brand-600" /> {group.label}
+            <Calendar size={18} className="text-brand-500" /> {group.label}
           </h2>
           <div className="space-y-3">
             {group.events.map((event) => (
@@ -24,7 +24,7 @@ export function AgendaList({
                 <div className="min-w-0 flex-1">
                   <Link
                     href={`/feirinhas/${event.fairSlug}`}
-                    className="font-semibold text-ink-900 hover:text-brand-700"
+                    className="font-semibold text-ink-900 hover:text-brand-600"
                   >
                     {event.title}
                   </Link>

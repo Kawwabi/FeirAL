@@ -20,14 +20,14 @@ export default async function HomePage() {
     <div>
       <section className="border-b border-ink-200 bg-gradient-to-br from-brand-50 via-white to-emerald-50">
         <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 sm:py-20">
-          <span className="inline-flex items-center gap-2 rounded-full border border-brand-200 bg-white px-3 py-1 text-xs font-semibold text-brand-700">
+          <span className="inline-flex items-center gap-2 rounded-full border border-brand-200 bg-white px-3 py-1 text-xs font-semibold text-brand-600">
             <Sparkles size={13} /> {fairs.length} feirinhas publicadas
           </span>
           <h1 className="mt-4 max-w-3xl text-4xl font-bold tracking-tight text-ink-900 sm:text-5xl">
-            Descubra as feirinhas de <span className="text-brand-600">Alagoas</span> perto de voce
+            Descubra as feirinhas de <span className="text-brand-500">Alagoas</span> perto de você
           </h1>
           <p className="mt-4 max-w-2xl text-lg text-ink-600">
-            Artesanato, gastronomia, moda e eventos culturais em um so lugar. Encontre pelo mapa, pela agenda
+            Artesanato, gastronomia, moda e eventos culturais em um só lugar. Encontre pelo mapa, pela agenda
             ou por categoria.
           </p>
 
@@ -36,7 +36,7 @@ export default async function HomePage() {
               <Search size={18} className="absolute left-3 top-1/2 -translate-y-1/2 text-ink-400" />
               <input
                 name="q"
-                placeholder="O que voce procura? Ex.: artesanato em Maceio"
+                placeholder="O que você procura? Ex.: artesanato em Maceió"
                 className="w-full rounded-xl border border-ink-300 bg-white py-3 pl-10 pr-3 text-sm shadow-sm focus-ring"
               />
             </div>
@@ -50,7 +50,7 @@ export default async function HomePage() {
               <Link
                 key={cat.slug}
                 href={`/categorias/${cat.slug}`}
-                className="rounded-full border border-ink-200 bg-white px-3 py-1.5 text-sm font-medium text-ink-700 hover:border-brand-300 hover:text-brand-700"
+                className="rounded-full border border-ink-200 bg-white px-3 py-1.5 text-sm font-medium text-ink-700 hover:border-brand-300 hover:text-brand-600"
               >
                 {cat.icon ? `${cat.icon} ` : ""}
                 {cat.name}
@@ -84,16 +84,16 @@ export default async function HomePage() {
         <section>
           <SectionTitle
             title="Feirinhas em destaque"
-            subtitle="Selecionadas para voce"
+            subtitle="Selecionadas para você"
             action={
-              <Link href="/feirinhas" className="text-sm font-medium text-brand-700 hover:underline">
+              <Link href="/feirinhas" className="text-sm font-medium text-brand-600 hover:underline">
                 Ver todas
               </Link>
             }
           />
           {featured.length === 0 ? (
             <Card className="p-8 text-center text-ink-500">
-              Ainda nao ha feirinhas publicadas. Seja o primeiro organizador a cadastrar!
+              Ainda não há feirinhas publicadas. Seja o primeiro organizador a cadastrar!
             </Card>
           ) : (
             <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
@@ -124,19 +124,19 @@ function EventsHighlights({
     .slice(0, 3);
 
   return (
-    <section className="grid gap-8 lg:grid-cols-3">
+    <section className="grid grid-cols-1 gap-8 lg:grid-cols-3">
       <div className="lg:col-span-2">
-        <SectionTitle title="Proximos eventos" subtitle="Nao perca as proximas feirinhas" />
+        <SectionTitle title="Próximos eventos" subtitle="Não perca as próximas feirinhas" />
         <div className="space-y-3">
           {events.length === 0 ? (
             <Card className="p-6 text-sm text-ink-500">Nenhum evento futuro cadastrado.</Card>
           ) : (
             events.map((event) => (
               <Card key={event.id} className="flex flex-wrap items-center justify-between gap-3 p-4">
-                <div>
+                <div className="min-w-0 flex-1">
                   <Link
                     href={`/feirinhas/${event.fairSlug}`}
-                    className="font-semibold text-ink-900 hover:text-brand-700"
+                    className="font-semibold text-ink-900 hover:text-brand-600"
                   >
                     {event.title}
                   </Link>
@@ -144,7 +144,7 @@ function EventsHighlights({
                     {event.city} - {event.fairName}
                   </p>
                 </div>
-                <Link href="/agenda" className="text-xs font-medium text-brand-700 hover:underline">
+                <Link href="/agenda" className="text-xs font-medium text-brand-600 hover:underline">
                   Ver na agenda
                 </Link>
               </Card>
@@ -157,17 +157,17 @@ function EventsHighlights({
         <SectionTitle title="Mais bem avaliadas" />
         <div className="space-y-3">
           {topRated.length === 0 ? (
-            <Card className="p-6 text-sm text-ink-500">Ainda sem avaliacoes.</Card>
+            <Card className="p-6 text-sm text-ink-500">Ainda sem avaliações.</Card>
           ) : (
             topRated.map((fair, index) => (
               <Card key={fair.id} className="flex items-center gap-3 p-4">
-                <span className="grid h-9 w-9 place-items-center rounded-lg bg-brand-100 text-sm font-bold text-brand-700">
+                <span className="grid h-9 w-9 place-items-center rounded-lg bg-brand-100 text-sm font-bold text-brand-600">
                   {index + 1}
                 </span>
                 <div className="min-w-0 flex-1">
                   <Link
                     href={`/feirinhas/${fair.slug}`}
-                    className="block truncate font-medium text-ink-900 hover:text-brand-700"
+                    className="block truncate font-medium text-ink-900 hover:text-brand-600"
                   >
                     {fair.name}
                   </Link>
@@ -197,7 +197,7 @@ function HomeFooterInfo({
     <>
       <section className="grid gap-4 rounded-2xl border border-ink-200 bg-white p-6 sm:grid-cols-3">
         <div className="text-center">
-          <p className="text-3xl font-bold text-brand-600">{count}</p>
+          <p className="text-3xl font-bold text-brand-500">{count}</p>
           <p className="text-sm text-ink-500">feirinhas publicadas</p>
         </div>
         <div className="text-center">
@@ -215,8 +215,8 @@ function HomeFooterInfo({
           <div>
             <h2 className="text-2xl font-bold">Organiza uma feirinha?</h2>
             <p className="mt-2 max-w-xl text-white/70">
-              Cadastre gratuitamente, divulgue no mapa, monte sua agenda e alcance mais visitantes. Voce pode
-              impulsionar a visibilidade com anuncios patrocinados.
+              Cadastre gratuitamente, divulgue no mapa, monte sua agenda e alcance mais visitantes. Você pode
+              impulsionar a visibilidade com anúncios patrocinados.
             </p>
           </div>
           <div className="flex flex-wrap gap-3">

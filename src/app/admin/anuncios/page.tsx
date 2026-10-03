@@ -9,7 +9,7 @@ import { Card, EmptyState, PageHeader, buttonClass } from "@/components/ui";
 import { formatBRL, formatDate } from "@/lib/utils";
 import { AllAdsSection } from "@/components/admin-sections";
 
-export const metadata: Metadata = { title: "Moderacao de anuncios" };
+export const metadata: Metadata = { title: "Moderação de anúncios" };
 
 export default async function AdminAdsPage() {
   await requireRole(ROLES.ADMIN);
@@ -25,15 +25,15 @@ export default async function AdminAdsPage() {
   return (
     <div className="space-y-8">
       <PageHeader
-        eyebrow="Administracao"
-        title="Anuncios patrocinados"
-        description="Revise e aprove anuncios antes de exibi-los na plataforma."
+        eyebrow="Administração"
+        title="Anúncios patrocinados"
+        description="Revise e aprove anúncios antes de exibi-los na plataforma."
       />
 
       <section>
-        <h2 className="mb-3 text-base font-semibold text-ink-900">Aguardando aprovacao ({pending.length})</h2>
+        <h2 className="mb-3 text-base font-semibold text-ink-900">Aguardando aprovação ({pending.length})</h2>
         {pending.length === 0 ? (
-          <EmptyState title="Nenhum anuncio pendente" description="Nenhum anuncio aguardando revisao." />
+          <EmptyState title="Nenhum anúncio pendente" description="Nenhum anúncio aguardando revisão." />
         ) : (
           <div className="space-y-3">
             {pending.map((ad) => (

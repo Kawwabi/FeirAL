@@ -62,13 +62,13 @@ export default function FairMapInner({
             pathOptions={{
               color: "white",
               weight: 2,
-              fillColor: p.color ?? "#ea580c",
+              fillColor: p.color ?? "#FF7001",
               fillOpacity: 0.9,
             }}
           >
             <Popup>
               <div className="min-w-40">
-                <Link href={`/feirinhas/${p.slug}`} className="text-sm font-semibold text-brand-700">
+                <Link href={`/feirinhas/${p.slug}`} className="text-sm font-semibold text-brand-600">
                   {p.name}
                 </Link>
                 <p className="mt-0.5 text-xs text-ink-500">{p.city} - AL</p>

@@ -1,6 +1,6 @@
 import { haversineKm } from "./utils";
 
-// Logica pura de filtragem de feirinhas - coberta por testes em tests/filters.test.ts
+// Lógica pura de filtragem de feirinhas - coberta por testes em tests/filters.test.ts
 
 export interface FilterableFair {
   id: string;
@@ -12,7 +12,7 @@ export interface FilterableFair {
   longitude?: number | null;
   status: string;
   categorySlugs: string[];
-  /** Data da proxima ocorrencia (ISO) - pode ser null quando nao ha eventos futuros. */
+  /** Data da próxima ocorrência (ISO) - pode ser null quando não há eventos futuros. */
   nextEventAt?: string | null;
 }
 
@@ -26,7 +26,7 @@ export interface FairFilters {
   to?: string;
   /** Somente feirinhas com pelo menos um evento futuro. */
   onlyUpcoming?: boolean;
-  /** Filtro geografico: centro + raio em km. */
+  /** Filtro geográfico: centro + raio em km. */
   nearLat?: number;
   nearLng?: number;
   radiusKm?: number;
@@ -54,11 +54,11 @@ function dayEndIso(value: string): number {
 /**
  * Aplica os filtros da plataforma sobre uma lista de feirinhas.
  * Regras:
- *  - query: casa em nome ou descricao (sem acento, case-insensitive).
+ *  - query: casa em nome ou descrição (sem acento, case-insensitive).
  *  - categories: OR entre slugs selecionados.
  *  - city: igualdade normalizada.
- *  - from/to: a proxima ocorrencia deve cair dentro do intervalo.
- *  - nearLat/nearLng/radiusKm: distancia maxima em km.
+ *  - from/to: a próxima ocorrência deve cair dentro do intervalo.
+ *  - nearLat/nearLng/radiusKm: distância máxima em km.
  */
 export function filterFairs<T extends FilterableFair>(fairs: T[], filters: FairFilters): T[] {
   const status = filters.status ?? "PUBLISHED";
@@ -109,7 +109,7 @@ export function filterFairs<T extends FilterableFair>(fairs: T[], filters: FairF
   });
 }
 
-/** Ordena por proxima ocorrencia; feirinhas sem evento futuro vao para o final. */
+/** Ordena por próxima ocorrência; feirinhas sem evento futuro vão para o final. */
 export function sortByNextEvent<T extends FilterableFair>(fairs: T[]): T[] {
   return [...fairs].sort((a, b) => {
     const aTs = a.nextEventAt ? new Date(a.nextEventAt).getTime() : Number.POSITIVE_INFINITY;

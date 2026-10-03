@@ -72,7 +72,7 @@ export async function createFairAction(_prev: ActionState, formData: FormData): 
   } catch (error) {
     return {
       ok: false,
-      message: error instanceof AuthError ? error.message : "Faca login como organizador.",
+      message: error instanceof AuthError ? error.message : "Faça login como organizador.",
     };
   }
 
@@ -154,8 +154,8 @@ async function notifyAdminsOfNewFair(fairName: string) {
       createNotification({
         userId: admin.id,
         type: NOTIFICATION_TYPES.MODERATION,
-        title: "Nova feirinha aguardando revisao",
-        body: `A feirinha "${fairName}" foi enviada para aprovacao.`,
+        title: "Nova feirinha aguardando revisão",
+        body: `A feirinha "${fairName}" foi enviada para aprovação.`,
         link: "/admin/feirinhas",
       }),
     ),
@@ -168,11 +168,11 @@ export async function updateFairAction(_prev: ActionState, formData: FormData): 
   try {
     user = await requireRole(ROLES.ORGANIZER, ROLES.ADMIN);
   } catch (error) {
-    return { ok: false, message: error instanceof AuthError ? error.message : "Sem permissao." };
+    return { ok: false, message: error instanceof AuthError ? error.message : "Sem permissão." };
   }
 
   if (!(await canManageFair(fairId, user))) {
-    return { ok: false, message: "Voce nao pode editar esta feirinha." };
+    return { ok: false, message: "Você não pode editar esta feirinha." };
   }
 
   const parsed = readFairForm(formData);
@@ -259,7 +259,7 @@ export async function updateFairAction(_prev: ActionState, formData: FormData): 
   return { ok: true, message: "Feirinha atualizada com sucesso." };
 }
 
-/* ---------------- Ciclo de vida e moderacao ---------------- */
+/* ---------------- Ciclo de vida e moderação ---------------- */
 
 export async function submitFairForReviewAction(formData: FormData): Promise<void> {
   const fairId = String(formData.get("fairId") ?? "");
@@ -300,7 +300,7 @@ export async function adminApproveFairAction(formData: FormData): Promise<void> 
     userId: fair.organizerId,
     type: NOTIFICATION_TYPES.FAIR_PUBLISHED,
     title: "Sua feirinha foi publicada",
-    body: `"${fair.name}" ja esta visivel na plataforma.`,
+    body: `"${fair.name}" já está visível na plataforma.`,
     link: `/feirinhas/${fair.slug}`,
   });
   await notifyFairFollowers(fairId, {
@@ -316,7 +316,7 @@ export async function adminApproveFairAction(formData: FormData): Promise<void> 
 
 export async function adminRejectFairAction(formData: FormData): Promise<void> {
   const fairId = String(formData.get("fairId") ?? "");
-  const reason = String(formData.get("reason") ?? "Informacoes incompletas.");
+  const reason = String(formData.get("reason") ?? "Informações incompletas.");
   const admin = await requireRole(ROLES.ADMIN);
 
   const fair = await prisma.fair.update({
@@ -334,7 +334,7 @@ export async function adminRejectFairAction(formData: FormData): Promise<void> {
   await createNotification({
     userId: fair.organizerId,
     type: NOTIFICATION_TYPES.MODERATION,
-    title: "Ajustes necessarios na feirinha",
+    title: "Ajustes necessários na feirinha",
     body: reason,
     link: `/organizador/feirinhas/${fairId}/editar`,
   });

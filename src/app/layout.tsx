@@ -12,8 +12,8 @@ export const metadata: Metadata = {
     template: "%s | FeirAL",
   },
   description:
-    "Descubra, organize e divulgue as feirinhas de Alagoas: artesanato, alimentos, moda e eventos culturais em um so lugar.",
-  keywords: ["feirinha", "Alagoas", "Maceio", "artesanato", "feira", "cultura", "agenda"],
+    "Descubra, organize e divulgue as feirinhas de Alagoas: artesanato, alimentos, moda e eventos culturais em um só lugar.",
+  keywords: ["feirinha", "Alagoas", "Maceió", "artesanato", "feira", "cultura", "agenda"],
 };
 
 export default async function RootLayout({ children }: { children: React.ReactNode }) {

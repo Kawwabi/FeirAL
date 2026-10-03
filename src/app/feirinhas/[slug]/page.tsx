@@ -19,7 +19,7 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { slug } = await params;
   const fair = await getFairBySlug(slug);
-  if (!fair) return { title: "Feirinha nao encontrada" };
+  if (!fair) return { title: "Feirinha não encontrada" };
   return { title: fair.name, description: fair.shortDescription ?? fair.description.slice(0, 150) };
 }
 
@@ -56,7 +56,7 @@ export default async function FairDetailPage({ params }: { params: Promise<{ slu
     <div>
       {fair.status !== "PUBLISHED" ? (
         <div className="bg-amber-100 px-4 py-2 text-center text-sm text-amber-900">
-          Pre-visualizacao - esta feirinha ainda nao esta visivel publicamente.
+          Pre-visualização - esta feirinha ainda não está visível publicamente.
         </div>
       ) : null}
 
@@ -94,10 +94,10 @@ export default async function FairDetailPage({ params }: { params: Promise<{ slu
               <span className="inline-flex items-center gap-2">
                 <Stars value={summary.average} size={18} />
                 <span className="text-sm font-semibold text-ink-800">{summary.average.toFixed(1)}</span>
-                <span className="text-sm text-ink-500">({summary.count} avaliacoes)</span>
+                <span className="text-sm text-ink-500">({summary.count} avaliações)</span>
               </span>
             ) : (
-              <span className="text-sm text-ink-500">Sem avaliacoes ainda</span>
+              <span className="text-sm text-ink-500">Sem avaliações ainda</span>
             )}
             <span className="text-sm text-ink-500">{fair._count.followers} seguidores</span>
           </div>

@@ -2,7 +2,7 @@
   "name": "feiral",
   "version": "1.0.0",
   "private": true,
-  "description": "FeirAL - Plataforma web para cadastro, gestao e divulgacao de feirinhas em Alagoas",
+  "description": "FeirAL - Plataforma web para cadastro, gestão e divulgacao de feirinhas em Alagoas",
   "scripts": {
     "dev": "next dev",
     "build": "prisma generate && next build",

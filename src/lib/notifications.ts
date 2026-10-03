@@ -24,7 +24,7 @@ export async function createNotification(input: CreateNotificationInput) {
 
 /**
  * Notifica todos os seguidores de uma feirinha.
- * Respeita a preferencia de notificacao do usuario (por enquanto apenas a de novos eventos).
+ * Respeita a preferência de notificação do usuário (por enquanto apenas a de novos eventos).
  */
 export async function notifyFairFollowers(
   fairId: string,

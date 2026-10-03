@@ -14,13 +14,13 @@ import { FairStatusBadge } from "@/components/status-badge";
 import { Card, EmptyState, PageHeader, buttonClass } from "@/components/ui";
 import { formatDateTime } from "@/lib/utils";
 
-export const metadata: Metadata = { title: "Feirinhas e moderacao" };
+export const metadata: Metadata = { title: "Feirinhas e moderação" };
 
 const REJECT_REASONS = [
-  "Informacoes incompletas",
-  "Localizacao incorreta ou ausente",
-  "Descricao inadequada",
-  "Conteudo duplicado",
+  "Informações incompletas",
+  "Localização incorreta ou ausente",
+  "Descrição inadequada",
+  "Conteúdo duplicado",
   "Imagem inadequada",
 ];
 
@@ -44,13 +44,13 @@ export default async function AdminFairsPage() {
   return (
     <div className="space-y-8">
       <PageHeader
-        eyebrow="Administracao"
-        title="Feirinhas e moderacao"
+        eyebrow="Administração"
+        title="Feirinhas e moderação"
         description="Aprove, rejeite ou destaque feirinhas cadastradas pelos organizadores."
       />
 
       <section>
-        <h2 className="mb-3 text-base font-semibold text-ink-900">Aguardando revisao ({pending.length})</h2>
+        <h2 className="mb-3 text-base font-semibold text-ink-900">Aguardando revisão ({pending.length})</h2>
         {pending.length === 0 ? (
           <EmptyState title="Nenhuma feirinha pendente" description="Tudo em dia por aqui." />
         ) : (
@@ -70,9 +70,9 @@ export default async function AdminFairsPage() {
                     <p className="mt-2 line-clamp-3 text-sm text-ink-600">{fair.description}</p>
                     <Link
                       href={`/feirinhas/${fair.slug}`}
-                      className="mt-2 inline-flex items-center gap-1 text-xs font-medium text-brand-700 hover:underline"
+                      className="mt-2 inline-flex items-center gap-1 text-xs font-medium text-brand-600 hover:underline"
                     >
-                      <ExternalLink size={12} /> Ver pre-visualizacao
+                      <ExternalLink size={12} /> Ver pre-visualização
                     </Link>
                   </div>
 
@@ -135,7 +135,7 @@ function AllFairsSection({ others }: { others: OtherFair[] }) {
                 <div className="flex flex-wrap items-center gap-2">
                   <Link
                     href={`/feirinhas/${fair.slug}`}
-                    className="font-medium text-ink-900 hover:text-brand-700"
+                    className="font-medium text-ink-900 hover:text-brand-600"
                   >
                     {fair.name}
                   </Link>

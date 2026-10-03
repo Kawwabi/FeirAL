@@ -7,7 +7,7 @@ import { AdForm } from "@/components/forms";
 import { AdPlansCard, MyAdsList } from "@/components/ads-sections";
 import { Card, PageHeader, Stat } from "@/components/ui";
 
-export const metadata: Metadata = { title: "Anuncios patrocinados" };
+export const metadata: Metadata = { title: "Anúncios patrocinados" };
 
 export default async function OrganizerAdsPage() {
   const user = await requireRole(ROLES.ORGANIZER, ROLES.ADMIN);
@@ -34,12 +34,12 @@ export default async function OrganizerAdsPage() {
     <div className="space-y-6">
       <PageHeader
         eyebrow="Organizador"
-        title="Anuncios patrocinados"
-        description="Aumente a visibilidade das suas feirinhas com anuncios em destaque na plataforma."
+        title="Anúncios patrocinados"
+        description="Aumente a visibilidade das suas feirinhas com anúncios em destaque na plataforma."
       />
 
       <div className="grid gap-4 sm:grid-cols-3">
-        <Stat label="Impressoes" value={impressions.toLocaleString("pt-BR")} icon={<Eye size={16} />} tone="info" />
+        <Stat label="Impressões" value={impressions.toLocaleString("pt-BR")} icon={<Eye size={16} />} tone="info" />
         <Stat label="Cliques" value={clicks.toLocaleString("pt-BR")} icon={<MousePointerClick size={16} />} tone="brand" />
         <Stat label="CTR" value={`${ctr}%`} hint="cliques por impressao" icon={<TrendingUp size={16} />} tone="success" />
       </div>
@@ -47,10 +47,10 @@ export default async function OrganizerAdsPage() {
       <div className="grid gap-6 lg:grid-cols-2">
         <Card className="p-6">
           <h2 className="mb-4 inline-flex items-center gap-2 text-base font-semibold text-ink-900">
-            <Megaphone size={18} /> Criar novo anuncio
+            <Megaphone size={18} /> Criar novo anúncio
           </h2>
           {fairs.length === 0 ? (
-            <p className="text-sm text-ink-500">Cadastre uma feirinha antes de criar anuncios patrocinados.</p>
+            <p className="text-sm text-ink-500">Cadastre uma feirinha antes de criar anúncios patrocinados.</p>
           ) : (
             <AdForm fairs={fairs} />
           )}

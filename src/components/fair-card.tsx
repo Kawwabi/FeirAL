@@ -8,8 +8,8 @@ export function FairCard({ fair }: { fair: FairListItem }) {
   const description = fair.shortDescription || truncate(fair.description, 130);
 
   return (
-    <article className="group card-surface overflow-hidden transition-shadow hover:shadow-lg">
-      <Link href={`/feirinhas/${fair.slug}`} className="block">
+    <article className="group card-surface flex flex-col overflow-hidden transition-all duration-200 ease-out hover:-translate-y-0.5 hover:shadow-lg">
+      <Link href={`/feirinhas/${fair.slug}`} className="block shrink-0">
         <div className="relative h-44 w-full overflow-hidden bg-ink-100">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
@@ -38,16 +38,16 @@ export function FairCard({ fair }: { fair: FairListItem }) {
         </div>
       </Link>
 
-      <div className="p-4">
+      <div className="flex flex-1 flex-col p-4">
         <Link href={`/feirinhas/${fair.slug}`}>
-          <h3 className="line-clamp-1 text-base font-semibold text-ink-900 group-hover:text-brand-700">
+          <h3 className="line-clamp-1 text-base font-semibold text-ink-900 transition-colors group-hover:text-brand-600">
             {fair.name}
           </h3>
         </Link>
 
         <p className="mt-1 line-clamp-2 text-sm text-ink-500">{description}</p>
 
-        <div className="mt-3 flex flex-wrap items-center gap-x-4 gap-y-1 text-xs text-ink-500">
+        <div className="mt-3 flex flex-wrap items-center gap-x-4 gap-y-1 pb-3 text-xs text-ink-500">
           <span className="inline-flex items-center gap-1">
             <MapPin size={13} /> {fair.city} - {fair.state}
           </span>
@@ -56,7 +56,7 @@ export function FairCard({ fair }: { fair: FairListItem }) {
           </span>
         </div>
 
-        <div className="mt-3 border-t border-ink-100 pt-3">
+        <div className="mt-auto border-t border-ink-100 pt-3">
           {fair.nextEventAt ? (
             <p className="inline-flex items-center gap-1.5 text-xs font-medium text-leaf-700">
               <Calendar size={13} /> {formatDateTime(fair.nextEventAt)}
@@ -83,12 +83,12 @@ export function FairAdCard({
   };
 }) {
   const tierLabel =
-    ({ BASIC: "Basico", STANDARD: "Padrao", PREMIUM: "Premium" } as Record<string, string>)[ad.tier] ?? ad.tier;
+    ({ BASIC: "Básico", STANDARD: "Padrão", PREMIUM: "Premium" } as Record<string, string>)[ad.tier] ?? ad.tier;
 
   return (
     <a
       href={`/api/ads/${ad.id}/click`}
-      className="group relative block overflow-hidden rounded-2xl border border-amber-200 bg-gradient-to-br from-amber-50 to-white p-4 shadow-sm transition-shadow hover:shadow-lg"
+      className="group relative block overflow-hidden rounded-2xl border border-amber-200 bg-gradient-to-br from-amber-50 to-white p-4 shadow-sm transition-all duration-200 ease-out hover:-translate-y-0.5 hover:shadow-lg"
     >
       <div className="mb-2 flex items-center justify-between">
         <Badge tone="warning">
@@ -103,7 +103,7 @@ export function FairAdCard({
         className="mb-3 h-28 w-full rounded-xl object-cover"
         loading="lazy"
       />
-      <h3 className="text-sm font-semibold text-ink-900 group-hover:text-brand-700">{ad.title}</h3>
+      <h3 className="text-sm font-semibold text-ink-900 transition-colors group-hover:text-brand-600">{ad.title}</h3>
       <p className="mt-1 line-clamp-2 text-xs text-ink-500">{ad.description ?? ad.fair.name}</p>
       <p className="mt-2 inline-flex items-center gap-1 text-xs font-medium text-ink-600">
         <MapPin size={12} /> {ad.fair.city}
@@ -131,7 +131,7 @@ export function FairListItemRow({ fair }: { fair: FairListItem }) {
         <div className="flex flex-wrap items-center gap-2">
           <Link
             href={`/feirinhas/${fair.slug}`}
-            className="text-lg font-semibold text-ink-900 hover:text-brand-700"
+            className="text-lg font-semibold text-ink-900 hover:text-brand-600"
           >
             {fair.name}
           </Link>

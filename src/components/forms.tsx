@@ -51,17 +51,17 @@ export function LoginForm() {
       <button
         type="submit"
         disabled={pending}
-        className="inline-flex w-full items-center justify-center gap-2 rounded-lg bg-brand-600 px-4 py-2.5 text-sm font-medium text-white hover:bg-brand-700 disabled:opacity-60"
+        className="inline-flex w-full items-center justify-center gap-2 rounded-lg bg-brand-500 px-4 py-2.5 text-sm font-medium text-white hover:bg-brand-600 disabled:opacity-60"
       >
         {pending ? <Loader2 size={16} className="animate-spin" /> : <LogIn size={16} />}
         Entrar
       </button>
 
       <div className="flex justify-between text-sm">
-        <Link href="/recuperar-senha" className="text-ink-500 hover:text-brand-700">
+        <Link href="/recuperar-senha" className="text-ink-500 hover:text-brand-600">
           Esqueci minha senha
         </Link>
-        <Link href="/cadastrar" className="font-medium text-brand-700 hover:underline">
+        <Link href="/cadastrar" className="font-medium text-brand-600 hover:underline">
           Criar conta
         </Link>
       </div>
@@ -84,13 +84,13 @@ export function RegisterForm() {
       <Field label="E-mail" required error={state.errors?.email}>
         <input name="email" type="email" required autoComplete="email" className={fieldClass} />
       </Field>
-      <Field label="Senha" required error={state.errors?.password} hint="Minimo de 6 caracteres.">
+      <Field label="Senha" required error={state.errors?.password} hint="Mínimo de 6 caracteres.">
         <input name="password" type="password" required minLength={6} autoComplete="new-password" className={fieldClass} />
       </Field>
 
       <div className="grid gap-4 sm:grid-cols-2">
         <Field label="Cidade">
-          <input name="city" className={fieldClass} placeholder="Ex.: Maceio" />
+          <input name="city" className={fieldClass} placeholder="Ex.: Maceió" />
         </Field>
         <Field label="Tipo de conta">
           <select name="role" defaultValue="VISITOR" className={fieldClass}>
@@ -103,15 +103,15 @@ export function RegisterForm() {
       <button
         type="submit"
         disabled={pending}
-        className="inline-flex w-full items-center justify-center gap-2 rounded-lg bg-brand-600 px-4 py-2.5 text-sm font-medium text-white hover:bg-brand-700 disabled:opacity-60"
+        className="inline-flex w-full items-center justify-center gap-2 rounded-lg bg-brand-500 px-4 py-2.5 text-sm font-medium text-white hover:bg-brand-600 disabled:opacity-60"
       >
         {pending ? <Loader2 size={16} className="animate-spin" /> : <UserPlus size={16} />}
         Criar conta
       </button>
 
       <p className="text-center text-sm text-ink-500">
-        Ja tem conta?{" "}
-        <Link href="/entrar" className="font-medium text-brand-700 hover:underline">
+        Já tem conta?{" "}
+        <Link href="/entrar" className="font-medium text-brand-600 hover:underline">
           Entrar
         </Link>
       </p>
@@ -131,10 +131,10 @@ export function RequestResetForm() {
       <button
         type="submit"
         disabled={pending}
-        className="inline-flex w-full items-center justify-center gap-2 rounded-lg bg-brand-600 px-4 py-2.5 text-sm font-medium text-white hover:bg-brand-700 disabled:opacity-60"
+        className="inline-flex w-full items-center justify-center gap-2 rounded-lg bg-brand-500 px-4 py-2.5 text-sm font-medium text-white hover:bg-brand-600 disabled:opacity-60"
       >
         {pending ? <Loader2 size={16} className="animate-spin" /> : <KeyRound size={16} />}
-        Gerar link de recuperacao
+        Gerar link de recuperação
       </button>
     </form>
   );
@@ -146,14 +146,14 @@ export function ResetPasswordForm({ token }: { token: string }) {
   return (
     <form action={formAction} className="space-y-4">
       <input type="hidden" name="token" value={token} />
-      <Field label="Nova senha" required error={state.errors?.password} hint="Minimo de 6 caracteres.">
+      <Field label="Nova senha" required error={state.errors?.password} hint="Mínimo de 6 caracteres.">
         <input name="password" type="password" required minLength={6} className={fieldClass} />
       </Field>
       <SubmitFeedback ok={state.ok} message={state.message} />
       <button
         type="submit"
         disabled={pending}
-        className="inline-flex w-full items-center justify-center gap-2 rounded-lg bg-brand-600 px-4 py-2.5 text-sm font-medium text-white hover:bg-brand-700 disabled:opacity-60"
+        className="inline-flex w-full items-center justify-center gap-2 rounded-lg bg-brand-500 px-4 py-2.5 text-sm font-medium text-white hover:bg-brand-600 disabled:opacity-60"
       >
         {pending ? <Loader2 size={16} className="animate-spin" /> : <KeyRound size={16} />}
         Redefinir senha
@@ -180,7 +180,7 @@ export function ProfileForm({
       <Field label="Cidade">
         <input name="city" defaultValue={user.city ?? ""} className={fieldClass} />
       </Field>
-      <Field label="Bio" hint="Uma breve descricao que aparece no seu perfil.">
+      <Field label="Bio" hint="Uma breve descrição que aparece no seu perfil.">
         <textarea name="bio" defaultValue={user.bio ?? ""} rows={3} className={`${fieldClass} min-h-0`} />
       </Field>
       <Field label="URL do avatar" hint="Opcional.">
@@ -189,7 +189,7 @@ export function ProfileForm({
       <button
         type="submit"
         disabled={pending}
-        className="inline-flex items-center gap-2 rounded-lg bg-brand-600 px-4 py-2 text-sm font-medium text-white hover:bg-brand-700 disabled:opacity-60"
+        className="inline-flex items-center gap-2 rounded-lg bg-brand-500 px-4 py-2 text-sm font-medium text-white hover:bg-brand-600 disabled:opacity-60"
       >
         {pending ? <Loader2 size={15} className="animate-spin" /> : <Check size={15} />}
         Salvar perfil
@@ -217,10 +217,10 @@ export function PreferencesForm({
   const selected = preferences.preferredCategories.split(",").filter(Boolean);
 
   const toggles = [
-    { name: "emailEnabled", label: "Notificacoes por e-mail", hint: "Receber novidades por e-mail.", checked: preferences.emailEnabled },
-    { name: "pushEnabled", label: "Notificacoes no navegador", hint: "Alertas em tempo real.", checked: preferences.pushEnabled },
+    { name: "emailEnabled", label: "Notificações por e-mail", hint: "Receber novidades por e-mail.", checked: preferences.emailEnabled },
+    { name: "pushEnabled", label: "Notificações no navegador", hint: "Alertas em tempo real.", checked: preferences.pushEnabled },
     { name: "newEvents", label: "Novos eventos das feirinhas que acompanho", hint: "Avisamos quando surgirem novas datas.", checked: preferences.newEvents },
-    { name: "reviewReplies", label: "Respostas e avaliacoes", hint: "Quando alguem interagir com suas contribuicoes.", checked: preferences.reviewReplies },
+    { name: "reviewReplies", label: "Respostas e avaliações", hint: "Quando alguém interagir com suas contribuições.", checked: preferences.reviewReplies },
     { name: "weeklyDigest", label: "Resumo semanal", hint: "Um e-mail por semana com destaques.", checked: preferences.weeklyDigest },
   ];
 
@@ -235,7 +235,7 @@ export function PreferencesForm({
               type="checkbox"
               name={toggle.name}
               defaultChecked={toggle.checked}
-              className="mt-0.5 h-4 w-4 rounded border-ink-300 text-brand-600"
+              className="mt-0.5 h-4 w-4 rounded border-ink-300 text-brand-500"
             />
             <span>
               <span className="block text-sm font-medium text-ink-800">{toggle.label}</span>
@@ -245,7 +245,7 @@ export function PreferencesForm({
         ))}
       </div>
 
-      <Field label="Cidade preferida" hint="Usamos para sugerir feirinhas proximas.">
+      <Field label="Cidade preferida" hint="Usamos para sugerir feirinhas próximas.">
         <input name="preferredCity" defaultValue={preferences.preferredCity ?? ""} className={fieldClass} />
       </Field>
 
@@ -262,7 +262,7 @@ export function PreferencesForm({
                 name="preferredCategories"
                 value={cat.slug}
                 defaultChecked={selected.includes(cat.slug)}
-                className="h-3.5 w-3.5 rounded border-ink-300 text-brand-600"
+                className="h-3.5 w-3.5 rounded border-ink-300 text-brand-500"
               />
               {cat.icon ? `${cat.icon} ` : ""}
               {cat.name}
@@ -274,10 +274,10 @@ export function PreferencesForm({
       <button
         type="submit"
         disabled={pending}
-        className="inline-flex items-center gap-2 rounded-lg bg-brand-600 px-4 py-2 text-sm font-medium text-white hover:bg-brand-700 disabled:opacity-60"
+        className="inline-flex items-center gap-2 rounded-lg bg-brand-500 px-4 py-2 text-sm font-medium text-white hover:bg-brand-600 disabled:opacity-60"
       >
         {pending ? <Loader2 size={15} className="animate-spin" /> : <Check size={15} />}
-        Salvar preferencias
+        Salvar preferências
       </button>
     </form>
   );
@@ -313,15 +313,15 @@ export function AdForm({ fairs }: { fairs: { id: string; name: string }[] }) {
         </select>
       </Field>
 
-      <Field label="Titulo do anuncio" required error={state.errors?.title}>
-        <input name="title" required className={fieldClass} placeholder="Ex.: Sabado tem feira na Pajucara!" />
+      <Field label="Título do anúncio" required error={state.errors?.title}>
+        <input name="title" required className={fieldClass} placeholder="Ex.: Sábado tem feira na Pajuçara!" />
       </Field>
 
-      <Field label="Descricao">
+      <Field label="Descrição">
         <textarea name="description" rows={2} className={`${fieldClass} min-h-0`} />
       </Field>
 
-      <Field label="Imagem do anuncio (URL)">
+      <Field label="Imagem do anúncio (URL)">
         <input name="imageUrl" className={fieldClass} placeholder="https://..." />
       </Field>
 
@@ -330,17 +330,17 @@ export function AdForm({ fairs }: { fairs: { id: string; name: string }[] }) {
           {Object.entries(AD_TIER_INFO).map(([key, info]) => (
             <option key={key} value={key}>
               {info.label} - {formatBRL(info.priceCents)}/dia ({info.impressionsPerDay.toLocaleString("pt-BR")}{" "}
-              impressoes/dia)
+              impressões/dia)
             </option>
           ))}
         </select>
       </Field>
 
       <div className="grid gap-4 sm:grid-cols-2">
-        <Field label="Inicio" required>
+        <Field label="Início" required>
           <input name="startsAt" type="date" required className={fieldClass} />
         </Field>
-        <Field label="Termino" required>
+        <Field label="Término" required>
           <input name="endsAt" type="date" required className={fieldClass} />
         </Field>
       </div>
@@ -348,10 +348,10 @@ export function AdForm({ fairs }: { fairs: { id: string; name: string }[] }) {
       <button
         type="submit"
         disabled={pending}
-        className="inline-flex items-center gap-2 rounded-lg bg-brand-600 px-4 py-2 text-sm font-medium text-white hover:bg-brand-700 disabled:opacity-60"
+        className="inline-flex items-center gap-2 rounded-lg bg-brand-500 px-4 py-2 text-sm font-medium text-white hover:bg-brand-600 disabled:opacity-60"
       >
         {pending ? <Loader2 size={15} className="animate-spin" /> : <Check size={15} />}
-        Enviar anuncio para aprovacao
+        Enviar anúncio para aprovação
       </button>
     </form>
   );

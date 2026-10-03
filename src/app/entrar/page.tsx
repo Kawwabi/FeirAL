@@ -17,7 +17,7 @@ export default async function LoginPage({ searchParams }: { searchParams: Promis
   return (
     <div className="mx-auto flex max-w-md flex-col px-4 py-16 sm:px-6">
       <div className="mb-6 text-center">
-        <span className="mx-auto grid h-12 w-12 place-items-center rounded-2xl bg-brand-600 text-white">
+        <span className="mx-auto grid h-12 w-12 place-items-center rounded-2xl bg-brand-500 text-white">
           <Ticket size={24} />
         </span>
         <h1 className="mt-4 text-2xl font-bold text-ink-900">Bem-vindo de volta</h1>
@@ -27,15 +27,15 @@ export default async function LoginPage({ searchParams }: { searchParams: Promis
       <Card className="p-6">
         {asString(params.redefinido) ? (
           <p className="mb-4 rounded-lg bg-emerald-50 px-3 py-2 text-sm text-emerald-800">
-            Senha redefinida com sucesso. Faca login com a nova senha.
+            Senha redefinida com sucesso. Faça login com a nova senha.
           </p>
         ) : null}
         <LoginForm />
       </Card>
 
       <p className="mt-6 text-center text-xs text-ink-400">
-        Ao entrar, voce concorda com as boas praticas de convivencia da plataforma.{" "}
-        <Link href="/sobre" className="text-brand-700 hover:underline">
+        Ao entrar, você concorda com as boas praticas de convivência da plataforma.{" "}
+        <Link href="/sobre" className="text-brand-600 hover:underline">
           Saiba mais
         </Link>
       </p>

@@ -7,7 +7,7 @@ import { markAllNotificationsReadAction, markNotificationReadAction } from "@/ap
 import { formatDateTime, cn } from "@/lib/utils";
 import { Badge, Card, EmptyState, PageHeader, buttonClass } from "@/components/ui";
 
-export const metadata: Metadata = { title: "Notificacoes" };
+export const metadata: Metadata = { title: "Notificações" };
 
 export default async function NotificationsPage() {
   const user = await requireUser();
@@ -18,8 +18,8 @@ export default async function NotificationsPage() {
     <div className="space-y-6">
       <PageHeader
         eyebrow="Minha conta"
-        title="Notificacoes"
-        description="Avisos sobre eventos, avaliacoes e moderacao."
+        title="Notificações"
+        description="Avisos sobre eventos, avaliações e moderação."
         action={
           unread > 0 ? (
             <form action={markAllNotificationsReadAction}>
@@ -34,8 +34,8 @@ export default async function NotificationsPage() {
       {notifications.length === 0 ? (
         <EmptyState
           icon={<Bell size={28} />}
-          title="Nenhuma notificacao"
-          description="Quando houver novidades nas feirinhas que voce acompanha, aparecerao aqui."
+          title="Nenhuma notificação"
+          description="Quando houver novidades nas feirinhas que você acompanha, aparecerão aqui."
         />
       ) : (
         <div className="space-y-2">

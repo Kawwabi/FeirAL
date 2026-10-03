@@ -46,18 +46,18 @@ export function ReviewForm({
       </div>
 
       <label className="block">
-        <span className="mb-1 block text-sm font-medium text-ink-700">Titulo (opcional)</span>
+        <span className="mb-1 block text-sm font-medium text-ink-700">Título (opcional)</span>
         <input
           name="title"
           defaultValue={existing?.title ?? ""}
-          placeholder="Resuma sua experiencia"
+          placeholder="Resuma sua experiência"
           className={fieldClass}
         />
       </label>
 
       <label className="block">
         <span className="mb-1 block text-sm font-medium text-ink-700">
-          Comentario <span className="text-brand-600">*</span>
+          Comentário <span className="text-brand-500">*</span>
         </span>
         <textarea
           name="content"
@@ -65,14 +65,14 @@ export function ReviewForm({
           required
           minLength={5}
           rows={4}
-          placeholder="O que voce achou da feirinha? Conte sobre produtos, organizacao e ambiente."
+          placeholder="O que você achou da feirinha? Conte sobre produtos, organização e ambiente."
           className={cn(fieldClass, "min-h-24")}
         />
         {state.errors?.content ? <p className="mt-1 text-xs text-red-600">{state.errors.content}</p> : null}
       </label>
 
       <label className="block sm:max-w-56">
-        <span className="mb-1 block text-sm font-medium text-ink-700">Quando voce visitou?</span>
+        <span className="mb-1 block text-sm font-medium text-ink-700">Quando você visitou?</span>
         <input type="date" name="visitedAt" className={fieldClass} />
       </label>
 
@@ -86,10 +86,10 @@ export function ReviewForm({
       <button
         type="submit"
         disabled={pending}
-        className="inline-flex items-center gap-2 rounded-lg bg-brand-600 px-4 py-2 text-sm font-medium text-white hover:bg-brand-700 disabled:opacity-60"
+        className="inline-flex items-center gap-2 rounded-lg bg-brand-500 px-4 py-2 text-sm font-medium text-white hover:bg-brand-600 disabled:opacity-60"
       >
         {pending ? <Loader2 size={15} className="animate-spin" /> : <Star size={15} />}
-        {existing ? "Atualizar avaliacao" : "Publicar avaliacao"}
+        {existing ? "Atualizar avaliação" : "Publicar avaliação"}
       </button>
     </form>
   );

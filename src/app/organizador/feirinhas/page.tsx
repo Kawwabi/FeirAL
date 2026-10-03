@@ -24,7 +24,7 @@ export default async function OrganizerFairsPage() {
       <PageHeader
         eyebrow="Organizador"
         title="Minhas feirinhas"
-        description="Edite, envie para aprovacao ou remova feirinhas cadastradas."
+        description="Edite, envie para aprovação ou remova feirinhas cadastradas."
         action={
           <Link href="/organizador/feirinhas/nova" className={buttonClass("primary")}>
             <Plus size={16} /> Nova feirinha
@@ -74,7 +74,7 @@ export default async function OrganizerFairsPage() {
                     <form action={submitFairForReviewAction}>
                       <input type="hidden" name="fairId" value={fair.id} />
                       <button type="submit" className={buttonClass("success", "sm")}>
-                        <Send size={14} /> Enviar para aprovacao
+                        <Send size={14} /> Enviar para aprovação
                       </button>
                     </form>
                   ) : null}

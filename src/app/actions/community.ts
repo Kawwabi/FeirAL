@@ -31,7 +31,7 @@ export async function upsertReviewAction(_prev: ActionState, formData: FormData)
   });
 
   if (!parsed.success) {
-    return { ok: false, message: "Confira a avaliacao.", errors: fieldErrors(parsed.error.issues) };
+    return { ok: false, message: "Confira a avaliação.", errors: fieldErrors(parsed.error.issues) };
   }
 
   const { fairId, rating, title, content, visitedAt } = parsed.data;
@@ -39,7 +39,7 @@ export async function upsertReviewAction(_prev: ActionState, formData: FormData)
     where: { id: fairId },
     select: { slug: true, organizerId: true, name: true },
   });
-  if (!fair) return { ok: false, message: "Feirinha nao encontrada." };
+  if (!fair) return { ok: false, message: "Feirinha não encontrada." };
 
   await prisma.review.upsert({
     where: { fairId_authorId: { fairId, authorId: user.id } },
@@ -60,7 +60,7 @@ export async function upsertReviewAction(_prev: ActionState, formData: FormData)
     await createNotification({
       userId: fair.organizerId,
       type: NOTIFICATION_TYPES.REVIEW_REPLY,
-      title: `Nova avaliacao em ${fair.name}`,
+      title: `Nova avaliação em ${fair.name}`,
       body: `${user.name} avaliou a feirinha com ${rating} estrela(s).`,
       link: `/feirinhas/${fair.slug}#avaliacoes`,
     });
@@ -68,7 +68,7 @@ export async function upsertReviewAction(_prev: ActionState, formData: FormData)
 
   revalidatePath(`/feirinhas/${fair.slug}`);
   revalidatePath("/perfil/avaliacoes");
-  return { ok: true, message: "Avaliacao publicada. Obrigado!" };
+  return { ok: true, message: "Avaliação publicada. Obrigado!" };
 }
 
 export async function deleteReviewAction(formData: FormData): Promise<void> {
@@ -102,11 +102,11 @@ export async function addCommentAction(_prev: ActionState, formData: FormData): 
   });
 
   if (!parsed.success) {
-    return { ok: false, message: "Escreva um comentario valido.", errors: fieldErrors(parsed.error.issues) };
+    return { ok: false, message: "Escreva um comentário valido.", errors: fieldErrors(parsed.error.issues) };
   }
 
   const slug = await fairSlug(parsed.data.fairId);
-  if (!slug) return { ok: false, message: "Feirinha nao encontrada." };
+  if (!slug) return { ok: false, message: "Feirinha não encontrada." };
 
   await prisma.comment.create({
     data: {
@@ -119,7 +119,7 @@ export async function addCommentAction(_prev: ActionState, formData: FormData): 
 
   await logAudit({ actorId: user.id, action: "COMMENT_CREATED", entityType: "Fair", entityId: parsed.data.fairId });
   revalidatePath(`/feirinhas/${slug}`);
-  return { ok: true, message: "Comentario adicionado." };
+  return { ok: true, message: "Comentário adicionado." };
 }
 
 export async function deleteCommentAction(formData: FormData): Promise<void> {
@@ -146,8 +146,8 @@ export async function submitFeedbackAction(_prev: ActionState, formData: FormDat
       ok: false,
       message:
         error instanceof AuthError
-          ? "Apenas organizadores podem enviar feedback de participacao."
-          : "Sem permissao.",
+          ? "Apenas organizadores podem enviar feedback de participação."
+          : "Sem permissão.",
     };
   }
 
@@ -160,11 +160,11 @@ export async function submitFeedbackAction(_prev: ActionState, formData: FormDat
   });
 
   if (!parsed.success) {
-    return { ok: false, message: "Confira o formulario.", errors: fieldErrors(parsed.error.issues) };
+    return { ok: false, message: "Confira o formulário.", errors: fieldErrors(parsed.error.issues) };
   }
 
   const slug = await fairSlug(parsed.data.fairId);
-  if (!slug) return { ok: false, message: "Feirinha nao encontrada." };
+  if (!slug) return { ok: false, message: "Feirinha não encontrada." };
 
   await prisma.organizerFeedback.create({
     data: {
@@ -199,7 +199,7 @@ export async function createReportAction(_prev: ActionState, formData: FormData)
   });
 
   if (!parsed.success) {
-    return { ok: false, message: "Confira os dados da denuncia.", errors: fieldErrors(parsed.error.issues) };
+    return { ok: false, message: "Confira os dados da denúncia.", errors: fieldErrors(parsed.error.issues) };
   }
 
   await prisma.moderationReport.create({
@@ -220,10 +220,10 @@ export async function createReportAction(_prev: ActionState, formData: FormData)
     metadata: { reason: parsed.data.reason },
   });
 
-  return { ok: true, message: "Denuncia registrada. Nossa equipe vai analisar." };
+  return { ok: true, message: "Denúncia registrada. Nossa equipe vai analisar." };
 }
 
-/** Marca um conteudo como oculto (usado pelo admin na fila de moderacao). */
+/** Marca um conteúdo como oculto (usado pelo admin na fila de moderação). */
 export async function hideContentAction(formData: FormData): Promise<void> {
   const type = String(formData.get("type") ?? "");
   const id = String(formData.get("id") ?? "");

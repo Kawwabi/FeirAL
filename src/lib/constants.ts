@@ -1,4 +1,4 @@
-// Constantes de dominio da plataforma FeirAL.
+// Constantes de domínio da plataforma FeirAL.
 
 export const ROLES = {
   VISITOR: "VISITOR",
@@ -26,7 +26,7 @@ export type FairStatus = (typeof FAIR_STATUS)[keyof typeof FAIR_STATUS];
 
 export const FAIR_STATUS_LABELS: Record<string, string> = {
   DRAFT: "Rascunho",
-  PENDING_REVIEW: "Aguardando revisao",
+  PENDING_REVIEW: "Aguardando revisão",
   PUBLISHED: "Publicada",
   REJECTED: "Rejeitada",
   ARCHIVED: "Arquivada",
@@ -60,18 +60,18 @@ export const AD_TIER_INFO: Record<
   { label: string; priceCents: number; impressionsPerDay: number; color: string; perks: string[] }
 > = {
   BASIC: {
-    label: "Basico",
+    label: "Básico",
     priceCents: 4900,
     impressionsPerDay: 500,
     color: "#0ea5e9",
-    perks: ["Exibicao na pagina de feirinhas", "Metricas de impressoes"],
+    perks: ["Exibição na página de feirinhas", "Métricas de impressões"],
   },
   STANDARD: {
-    label: "Padrao",
+    label: "Padrão",
     priceCents: 12900,
     impressionsPerDay: 2000,
-    color: "#f97316",
-    perks: ["Destaque na pagina inicial", "Metricas de impressoes e cliques", "Selo de feirinha parceira"],
+    color: "#FF7001",
+    perks: ["Destaque na página inicial", "Métricas de impressões e cliques", "Selo de feirinha parceira"],
   },
   PREMIUM: {
     label: "Premium",
@@ -79,28 +79,28 @@ export const AD_TIER_INFO: Record<
     impressionsPerDay: 6000,
     color: "#a855f7",
     perks: [
-      "Topo da pagina inicial",
+      "Topo da página inicial",
       "Banner na agenda de eventos",
-      "Metricas completas",
+      "Métricas completas",
       "Selo de feirinha parceira",
-      "Apoio na criacao do anuncio",
+      "Apoio na criação do anúncio",
     ],
   },
 };
 
 export const OFFERING_KINDS: Record<string, string> = {
   PRODUCT: "Produto",
-  SERVICE: "Servico",
+  SERVICE: "Serviço",
 };
 
-// Categorias iniciais da plataforma (tambem cadastradas via seed).
+// Categorias iniciais da plataforma (também cadastradas via seed).
 export const DEFAULT_CATEGORIES = [
   {
     slug: "artesanato",
     name: "Artesanato",
     icon: "🎨",
     color: "#f59e0b",
-    description: "Artesanato local, ceramica, renda, palha e trabalhos manuais alagoanos.",
+    description: "Artesanato local, cerâmica, renda, palha e trabalhos manuais alagoanos.",
   },
   {
     slug: "alimentos",
@@ -114,14 +114,14 @@ export const DEFAULT_CATEGORIES = [
     name: "Moda",
     icon: "👗",
     color: "#ec4899",
-    description: "Roupas, acessorios, calcados e brecho com estilo regional.",
+    description: "Roupas, acessórios, calçados e brechó com estilo regional.",
   },
   {
     slug: "eventos-culturais",
     name: "Eventos Culturais",
     icon: "🎭",
     color: "#8b5cf6",
-    description: "Musica, forro, literatura de cordel, teatro e manifestacoes culturais.",
+    description: "Música, forro, literatura de cordel, teatro e manifestações culturais.",
   },
   {
     slug: "flores-e-plantas",
@@ -132,39 +132,39 @@ export const DEFAULT_CATEGORIES = [
   },
   {
     slug: "antiguidades",
-    name: "Antiguidades e Colecionaveis",
+    name: "Antiguidades e Colecionáveis",
     icon: "🕰️",
     color: "#64748b",
-    description: "Pecas antigas, discos de vinil, livros usados e colecionaveis.",
+    description: "Peças antigas, discos de vinil, livros usados e colecionáveis.",
   },
 ] as const;
 
 export const CITIES_AL = [
-  "Maceio",
+  "Maceió",
   "Arapiraca",
   "Rio Largo",
-  "Palmeira dos Indios",
-  "Uniao dos Palmares",
+  "Palmeira dos Índios",
+  "União dos Palmares",
   "Penedo",
   "Pilar",
-  "Sao Miguel dos Campos",
+  "São Miguel dos Campos",
   "Delmiro Gouveia",
   "Coruripe",
   "Marechal Deodoro",
   "Santana do Ipanema",
   "Girau do Ponciano",
-  "Barra de Sao Miguel",
+  "Barra de São Miguel",
   "Paripueira",
   "Murici",
   "Porto Calvo",
   "Viçosa",
-  "Olho d'Agua das Flores",
+  "Olho d'Água das Flores",
   "Traipu",
 ] as const;
 
 export const REPORT_REASONS = [
-  "Informacao incorreta",
-  "Conteudo ofensivo",
+  "Informação incorreta",
+  "Conteúdo ofensivo",
   "Feirinha inexistente ou fraudulenta",
   "Spam ou propaganda enganosa",
   "Outro",

@@ -54,7 +54,7 @@ export async function destroySessionCookie(): Promise<void> {
   store.delete(COOKIE_NAME);
 }
 
-/** Le o usuario autenticado a partir do cookie de sessao (sempre validado no banco). */
+/** Le o usuário autenticado a partir do cookie de sessão (sempre validado no banco). */
 export async function getCurrentUser(): Promise<SessionUser | null> {
   const store = await cookies();
   const token = store.get(COOKIE_NAME)?.value;
@@ -84,18 +84,18 @@ export class AuthError extends Error {
   }
 }
 
-/** Garante que existe um usuario logado; lanca AuthError caso contrario. */
+/** Garante que existe um usuário logado; lanca AuthError caso contrário. */
 export async function requireUser(): Promise<SessionUser> {
   const user = await getCurrentUser();
-  if (!user) throw new AuthError("Voce precisa entrar na plataforma.");
+  if (!user) throw new AuthError("Você precisa entrar na plataforma.");
   return user;
 }
 
-/** Garante que o usuario possui um dos papeis exigidos. */
+/** Garante que o usuário possui um dos papéis exigidos. */
 export async function requireRole(...roles: Role[]): Promise<SessionUser> {
   const user = await requireUser();
   if (!roles.includes(user.role)) {
-    throw new AuthError("Voce nao tem permissao para acessar este recurso.");
+    throw new AuthError("Você não tem permissão para acessar este recurso.");
   }
   return user;
 }
